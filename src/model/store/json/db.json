@@ -1,0 +1,31 @@
+{
+  "users": [
+    {
+      "_id": "73d76491-af80-4e88-b702-0e55dab0bd20",
+      "email": "homer.simpson@springfield.com",
+      "password": "duffBeer123",
+      "firstName": "Homer",
+      "secondName": "Simpson",
+      "aboutMe": null,
+      "imageUrl": null
+    },
+    {
+      "_id": "821a472e-8d6f-4a29-a3c2-1ab613c7feb0",
+      "email": "marge.simpson@springfield.com",
+      "password": "blueHair456",
+      "firstName": "Marge",
+      "secondName": "Simpson",
+      "aboutMe": null,
+      "imageUrl": null
+    },
+    {
+      "_id": "cdef4b8b-6a2f-4610-b535-82e5204c6439",
+      "email": "bart.simpson@springfield.com",
+      "password": "eatMyShorts789",
+      "firstName": "Bart",
+      "secondName": "Simpson",
+      "aboutMe": null,
+      "imageUrl": null
+    }
+  ]
+}
