@@ -5,7 +5,7 @@
       "password": "architect123",
       "firstName": "Ted",
       "lastName": "Mosby",
-      "_id": "3b63f916-38d2-41d5-919d-d04031ebd67d",
+      "_id": "2a16dc8b-1d76-4707-9b2e-45d6b022e330",
       "aboutMe": null,
       "imageUrl": null
     },
@@ -14,7 +14,7 @@
       "password": "suitUp456",
       "firstName": "Barny",
       "lastName": "Stinson",
-      "_id": "96d0c9f4-cd0b-4885-84e1-1f3d5e6000f6",
+      "_id": "edff7bfb-fa7c-4cbe-9777-6e1cf5399af2",
       "aboutMe": null,
       "imageUrl": null
     },
@@ -23,20 +23,38 @@
       "password": "canadian789",
       "firstName": "Robin",
       "lastName": "Scherbatsky",
-      "_id": "5e2e1521-8e0e-42ae-b225-53e0fad561ca",
+      "_id": "8b9a9b8c-84fc-43be-b9c7-0a681ad42ca6",
       "aboutMe": null,
       "imageUrl": null
     }
   ],
   "clubs": [
     {
-      "_id": "69a51388-213d-4d3f-a933-179b5696316e",
-      "name": "test",
-      "description": "test",
-      "latitude": "4",
-      "longitude": "4",
-      "imageUrls": null,
-      "userId": "ba107cbf-7453-4b6c-ad8d-6d4c836857fc"
+      "name": "DLRG Regensburg",
+      "description": "Deutsche Lebens-Rettungs-Gesellschaft Ortsgruppe Regensburg",
+      "latitude": 49.0195,
+      "longitude": 12.0974,
+      "_id": "b93d1b9e-2108-4e24-b35e-5de654a224e5",
+      "userId": "351b4f80-369d-4695-aded-b63c0ce64357",
+      "imageUrls": null
+    },
+    {
+      "name": "DLRG Amberg",
+      "description": "Deutsche Lebens-Rettungs-Gesellschaft Ortsgruppe Amberg",
+      "latitude": 49.4447,
+      "longitude": 11.8583,
+      "_id": "a6afb658-93a6-4749-af53-59c7df7ed013",
+      "userId": "351b4f80-369d-4695-aded-b63c0ce64357",
+      "imageUrls": null
+    },
+    {
+      "name": "DLRG Furth im Wald",
+      "description": "Deutsche Lebens-Rettungs-Gesellschaft Ortsgruppe Furth im Wald",
+      "latitude": 49.3089,
+      "longitude": 12.8447,
+      "_id": "51d9f2a0-178c-44ba-94e4-c3809fceedf1",
+      "userId": "351b4f80-369d-4695-aded-b63c0ce64357",
+      "imageUrls": null
     }
   ]
 }

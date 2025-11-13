@@ -8,4 +8,4 @@ export interface Club {
   userId: string;
 }
 
-export type NewClub = Omit<Club, "_id" | "userId">;
+export type NewClub = Omit<Club, "_id" | "userId" | "imageUrls">;

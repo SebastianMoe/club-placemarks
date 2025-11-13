@@ -27,7 +27,7 @@ export const clubJsonStore: ClubStore = {
       _id: v4(), 
       userId,
       description: newClub.description || null,
-      imageUrls: newClub.imageUrls || null
+      imageUrls: null
     } as Club;
     jsonFile.data.clubs.push(club);
     await jsonFile.write();
