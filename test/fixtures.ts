@@ -4,7 +4,7 @@ export const maggie: NewUser = {
   email: "maggie.simpson@springfield.com",
   password: "pacifier999",
   firstName: "Maggie",
-  secondName: "Simpson",
+  lastName: "Simpson",
 };
 
 export const testUsers: User[] = [
@@ -13,7 +13,7 @@ export const testUsers: User[] = [
     email: "homer.simpson@springfield.com",
     password: "duffBeer123",
     firstName: "Homer",
-    secondName: "Simpson",
+    lastName: "Simpson",
     aboutMe: null,
     imageUrl: null,
   },
@@ -22,7 +22,7 @@ export const testUsers: User[] = [
     email: "marge.simpson@springfield.com",
     password: "blueHair456",
     firstName: "Marge",
-    secondName: "Simpson",
+    lastName: "Simpson",
     aboutMe: null,
     imageUrl: null,
   },
@@ -31,7 +31,7 @@ export const testUsers: User[] = [
     email: "bart.simpson@springfield.com",
     password: "eatMyShorts789",
     firstName: "Bart",
-    secondName: "Simpson",
+    lastName: "Simpson",
     aboutMe: null,
     imageUrl: null,
   },

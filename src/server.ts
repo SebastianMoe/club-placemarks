@@ -40,7 +40,7 @@ const init = async () => {
       password: process.env.COOKIE_PASSWORD,
       isSecure: false,
     },
-    redirectTo: "/",
+    redirectTo: "/login",
     validate: accountsController.validate,
   });
 

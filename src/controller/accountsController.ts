@@ -29,7 +29,7 @@ export const accountsController = {
         email: payload.email,
         password: payload.password,
         firstName: payload.firstName,
-        secondName: payload.secondName,
+        lastName: payload.lastName,
       };
 
       await dataBase.userStore.create(newUser);

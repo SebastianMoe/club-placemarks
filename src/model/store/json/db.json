@@ -2,28 +2,28 @@
   "users": [
     {
       "_id": "461e3416-24c4-47ed-b89e-49f57e367ec3",
-      "email": "homer.simpson@springfield.com",
-      "password": "duffBeer123",
-      "firstName": "Homer",
-      "secondName": "Simpson",
+      "email": "ted.mosby@newyork.com",
+      "password": "architect123",
+      "firstName": "Ted",
+      "lastName": "Mosby",
       "aboutMe": null,
       "imageUrl": null
     },
     {
       "_id": "55bf7f32-9710-483c-b42f-d360e0cb443d",
-      "email": "marge.simpson@springfield.com",
-      "password": "blueHair456",
-      "firstName": "Marge",
-      "secondName": "Simpson",
+      "email": "barny.stinson@newyork.com",
+      "password": "suitUp456",
+      "firstName": "Barny",
+      "lastName": "Stinson",
       "aboutMe": null,
       "imageUrl": null
     },
     {
       "_id": "3bf76305-c2d7-460c-96d2-b3f715b157d6",
-      "email": "bart.simpson@springfield.com",
-      "password": "eatMyShorts789",
-      "firstName": "Bart",
-      "secondName": "Simpson",
+      "email": "robin.scherbatsky@newyork.com",
+      "password": "canadian789",
+      "firstName": "Robin",
+      "lastName": "Scherbatsky",
       "aboutMe": null,
       "imageUrl": null
     },
@@ -34,6 +34,17 @@
       "_id": "ba107cbf-7453-4b6c-ad8d-6d4c836857fc",
       "aboutMe": null,
       "imageUrl": null
+    }
+  ],
+  "clubs": [
+    {
+      "_id": "69a51388-213d-4d3f-a933-179b5696316e",
+      "name": "test",
+      "description": "test",
+      "latitude": "4",
+      "longitude": "4",
+      "imageUrls": null,
+      "userId": "ba107cbf-7453-4b6c-ad8d-6d4c836857fc"
     }
   ]
 }

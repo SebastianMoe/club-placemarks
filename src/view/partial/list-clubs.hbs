@@ -1,0 +1,26 @@
+{{#each clubs}}
+  <div class="box box-link-hover-shadow">
+    <h2 class="title">
+      <span class="icon">
+        <i class="fas fa-users"></i>
+      </span>
+      {{name}}
+    </h2>
+    {{#if description}}
+      <p>{{description}}</p>
+    {{/if}}
+    <div class="buttons">
+      <a href="/club/{{_id}}" class="button is-info">
+        <span class="icon is-small">
+          <i class="fas fa-eye"></i>
+        </span>
+        <span>View</span>
+      </a>
+      <a href="/dashboard/deleteclub/{{_id}}" class="button is-danger">
+        <span class="icon is-small">
+          <i class="fas fa-trash"></i>
+        </span>
+      </a>
+    </div>
+  </div>
+{{/each}}

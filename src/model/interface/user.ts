@@ -3,7 +3,7 @@ export interface User {
   email: string;
   password: string;
   firstName: string;
-  secondName: string;
+  lastName: string;
   aboutMe: string | null;
   imageUrl: string | null;
 }
