@@ -3,14 +3,19 @@ import { assert } from "chai";
 import { db } from "../../src/model/db.ts";
 import { maggie, testUsers } from "../fixtures.ts";
 import { assertSubset } from "../test-utils.ts";
+import type { User } from "../../src/model/interface/user.ts";
 
 suite("User Model tests", () => {
+  let createdUsers: User[] = [];
+
   setup(async () => {
     db.init("json");
     await db.userStore!.deleteAll();
+    createdUsers = [];
     for (let i = 0; i < testUsers.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
-      testUsers[i] = await db.userStore!.create(testUsers[i]);
+      const user = await db.userStore!.create(testUsers[i]);
+      createdUsers.push(user);
     }
   });
 
@@ -34,10 +39,10 @@ suite("User Model tests", () => {
   });
 
   test("delete One User - success", async () => {
-    await db.userStore!.deleteById(testUsers[0]._id);
+    await db.userStore!.deleteById(createdUsers[0]._id);
     const returnedUsers = await db.userStore!.getAll();
-    assert.equal(returnedUsers.length, testUsers.length - 1);
-    const deletedUser = await db.userStore!.getById(testUsers[0]._id);
+    assert.equal(returnedUsers.length, createdUsers.length - 1);
+    const deletedUser = await db.userStore!.getById(createdUsers[0]._id);
     assert.isNull(deletedUser);
   });
 
@@ -56,6 +61,6 @@ suite("User Model tests", () => {
   test("delete One User - fail", async () => {
     await db.userStore!.deleteById("bad-id");
     const allUsers = await db.userStore!.getAll();
-    assert.equal(testUsers.length, allUsers.length);
+    assert.equal(createdUsers.length, allUsers.length);
   });
 });

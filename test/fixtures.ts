@@ -1,38 +1,29 @@
 import type { NewUser, User } from "../src/model/interface/user.ts";
 
 export const maggie: NewUser = {
-  email: "maggie.simpson@springfield.com",
-  password: "pacifier999",
-  firstName: "Maggie",
-  lastName: "Simpson",
+    "email": "ted.mosby@newyork.com",
+    "password": "architect123",
+    "firstName": "Ted",
+    "lastName": "Mosby",
 };
 
-export const testUsers: User[] = [
+export const testUsers: NewUser[] = [
   {
-    _id: "",
-    email: "homer.simpson@springfield.com",
-    password: "duffBeer123",
-    firstName: "Homer",
-    lastName: "Simpson",
-    aboutMe: null,
-    imageUrl: null,
+    "email": "ted.mosby@newyork.com",
+    "password": "architect123",
+    "firstName": "Ted",
+    "lastName": "Mosby",
   },
   {
-    _id: "",
-    email: "marge.simpson@springfield.com",
-    password: "blueHair456",
-    firstName: "Marge",
-    lastName: "Simpson",
-    aboutMe: null,
-    imageUrl: null,
+    "email": "barny.stinson@newyork.com",
+    "password": "suitUp456",
+    "firstName": "Barny",
+    "lastName": "Stinson",
   },
   {
-    _id: "",
-    email: "bart.simpson@springfield.com",
-    password: "eatMyShorts789",
-    firstName: "Bart",
-    lastName: "Simpson",
-    aboutMe: null,
-    imageUrl: null,
-  },
+    "email": "robin.scherbatsky@newyork.com",
+    "password": "canadian789",
+    "firstName": "Robin",
+    "lastName": "Scherbatsky",
+  }
 ];

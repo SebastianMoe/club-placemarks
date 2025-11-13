@@ -1,37 +1,29 @@
 {
   "users": [
     {
-      "_id": "461e3416-24c4-47ed-b89e-49f57e367ec3",
       "email": "ted.mosby@newyork.com",
       "password": "architect123",
       "firstName": "Ted",
       "lastName": "Mosby",
+      "_id": "a6f9c95e-4623-4602-9600-c7b6477b0e12",
       "aboutMe": null,
       "imageUrl": null
     },
     {
-      "_id": "55bf7f32-9710-483c-b42f-d360e0cb443d",
       "email": "barny.stinson@newyork.com",
       "password": "suitUp456",
       "firstName": "Barny",
       "lastName": "Stinson",
+      "_id": "23ca8d20-a2f8-4bed-9e21-c9c2aa46017e",
       "aboutMe": null,
       "imageUrl": null
     },
     {
-      "_id": "3bf76305-c2d7-460c-96d2-b3f715b157d6",
       "email": "robin.scherbatsky@newyork.com",
       "password": "canadian789",
       "firstName": "Robin",
       "lastName": "Scherbatsky",
-      "aboutMe": null,
-      "imageUrl": null
-    },
-    {
-      "email": "Sebastian@moritz-furth.de",
-      "password": "test123",
-      "firstName": "Sebastian",
-      "_id": "ba107cbf-7453-4b6c-ad8d-6d4c836857fc",
+      "_id": "a0d6a793-3083-4917-b7b7-b7ca81b817a8",
       "aboutMe": null,
       "imageUrl": null
     }
