@@ -7,6 +7,7 @@ import { fileURLToPath } from "node:url";
 import * as path from "node:path";
 import Handlebars from "handlebars";
 import { webRoutes } from "./web-routes.js";
+import { apiRoutes } from "./api-routes.js";
 import { accountsController } from "./controller/accountsController.js";
 import { dataBase } from "./model/db.js";
 
@@ -61,6 +62,7 @@ const init = async () => {
 
   // register server routes
   server.route(webRoutes);
+  server.route(apiRoutes);
 
   // start server
   await server.start();
