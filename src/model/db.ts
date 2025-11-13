@@ -8,6 +8,8 @@ export interface UserStore {
 
   getById(userId: User["_id"]): Promise<User | null>;
 
+  getByEmail(email: string): Promise<User | null>;
+
   create(newUser: NewUser): Promise<User>;
 
   update(user: User): Promise<User | null>;

@@ -1,11 +1,14 @@
 import Hapi from "@hapi/hapi";
 import Inert from "@hapi/inert";
 import Vision from "@hapi/vision";
+import Cookie from "@hapi/cookie";
 import dotenv from "dotenv";
 import { fileURLToPath } from "node:url";
 import * as path from "node:path";
 import Handlebars from "handlebars";
 import { webRoutes } from "./web-routes.js";
+import { accountsController } from "./controller/accountsController.js";
+import { dataBase } from "./model/db.js";
 
 // check if .env file is present
 const result: any = dotenv.config();
@@ -19,13 +22,29 @@ const __dirname: string = path.dirname(__filename);
 
 // init server
 const init = async () => {
+  // initialize database
+  dataBase.init("json");
+
   const server = Hapi.server({
     port: process.env.PORT,
     host: process.env.HOST,
   });
 
   // register plugins
-  await server.register([Vision, Inert]);
+  await server.register([Vision, Inert, Cookie]);
+
+  // configure cookie authentication
+  server.auth.strategy("session", "cookie", {
+    cookie: {
+      name: "placemark-session",
+      password: process.env.COOKIE_PASSWORD,
+      isSecure: false,
+    },
+    redirectTo: "/",
+    validate: accountsController.validate,
+  });
+
+  server.auth.default("session");
 
   // register template engine
   server.views({

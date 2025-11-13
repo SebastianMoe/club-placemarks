@@ -15,6 +15,12 @@ export const userJsonStore: UserStore = {
     return foundUser ?? null;
   },
 
+  async getByEmail(email: string): Promise<User | null> {
+    await jsonFile.read();
+    const foundUser = jsonFile.data.users.find((u: User) => u.email === email);
+    return foundUser ?? null;
+  },
+
   async create(newUser: NewUser): Promise<User> {
     await jsonFile.read();
     const user: User = { ...newUser, _id: v4(), aboutMe: null, imageUrl: null } as User;
