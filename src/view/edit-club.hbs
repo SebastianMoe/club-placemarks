@@ -1,0 +1,43 @@
+{{> menu active="dashboard"}}
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-half">
+        <h1 class="title">Edit Club</h1>
+        <form action="/club/{{club._id}}/edit" method="POST">
+          <div class="field">
+            <label class="label">Club Name</label>
+            <input class="input" type="text" placeholder="Enter club name" name="name" value="{{club.name}}" required>
+          </div>
+          <div class="field">
+            <label class="label">Description</label>
+            <textarea class="textarea" placeholder="Enter description (optional)" name="description">{{club.description}}</textarea>
+          </div>
+          <div class="columns">
+            <div class="column">
+              <div class="field">
+                <label class="label">Latitude</label>
+                <input class="input" type="number" step="any" placeholder="e.g. 52.5200" name="latitude" value="{{club.latitude}}">
+              </div>
+            </div>
+            <div class="column">
+              <div class="field">
+                <label class="label">Longitude</label>
+                <input class="input" type="number" step="any" placeholder="e.g. 13.4050" name="longitude" value="{{club.longitude}}">
+              </div>
+            </div>
+          </div>
+          <div class="field is-grouped">
+            <div class="control">
+              <button class="button is-primary" type="submit">Save Changes</button>
+            </div>
+            <div class="control">
+              <a href="/club/{{club._id}}" class="button is-light">Cancel</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
