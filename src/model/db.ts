@@ -1,9 +1,15 @@
+import mongoose from "mongoose";
+import dotenv from "dotenv";
 import type { NewUser, User } from "./interface/user.js";
 import type { NewClub, Club } from "./interface/club.js";
 import { userJsonStore } from "./store/json/user-json-store.js";
 import { clubJsonStore } from "./store/json/club-json-store.js";
+import { userMongoStore } from "./store/mongo/user-mongo-store.js";
+import { clubMongoStore } from "./store/mongo/club-mongo-store.js";
 
-type StoreType = "json";
+dotenv.config();
+
+type StoreType = "json" | "mongo";
 
 export interface UserStore {
   getAll(): Promise<User[]>;
@@ -41,17 +47,26 @@ interface DataBase {
   userStore: UserStore | null;
   clubStore: ClubStore | null;
 
-  init(storeType: StoreType): void;
+  init(storeType: StoreType): Promise<void>;
 }
 
 export const dataBase: DataBase = {
   userStore: null,
   clubStore: null,
 
-  init(storeType: StoreType) {
+  async init(storeType: StoreType) {
     if (storeType === "json") {
       this.userStore = userJsonStore;
       this.clubStore = clubJsonStore;
+    } else if (storeType === "mongo") {
+      this.userStore = userMongoStore;
+      this.clubStore = clubMongoStore;
+      if (process.env.MONGO_URL) {
+        await mongoose.connect(process.env.MONGO_URL);
+        console.log("Connected to MongoDB");
+      } else {
+        console.error("Missing MONGO_URL environment variable");
+      }
     } else {
       throw new Error(`unknown storeType ${storeType}`);
     }
