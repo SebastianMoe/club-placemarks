@@ -9,6 +9,9 @@
 # compiled typescript
 dist/
 
+#assignment files
+assignment/
+
 # logs
 logs
 *.log
