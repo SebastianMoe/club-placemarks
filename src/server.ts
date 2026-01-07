@@ -24,7 +24,7 @@ const __dirname: string = path.dirname(__filename);
 // init server
 const init = async () => {
   // initialize database
-  dataBase.init("json");
+  await dataBase.init("mongo");
 
   const server = Hapi.server({
     port: process.env.PORT,
