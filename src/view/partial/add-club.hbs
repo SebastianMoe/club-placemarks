@@ -1,0 +1,25 @@
+<form action="/dashboard/addclub" method="POST">
+  <div class="field">
+    <label class="label">Club Name</label>
+    <input class="input" type="text" placeholder="Enter club name" name="name" required>
+  </div>
+  <div class="field">
+    <label class="label">Description</label>
+    <input class="input" type="text" placeholder="Enter description" name="description">
+  </div>
+  <div class="columns">
+    <div class="column">
+      <div class="field">
+        <label class="label">Latitude</label>
+        <input class="input" type="number" step="any" placeholder="e.g. 52.5200" name="latitude">
+      </div>
+    </div>
+    <div class="column">
+      <div class="field">
+        <label class="label">Longitude</label>
+        <input class="input" type="number" step="any" placeholder="e.g. 13.4050" name="longitude">
+      </div>
+    </div>
+  </div>
+  <button class="button is-link">Add Club</button>
+</form>

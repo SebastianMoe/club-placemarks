@@ -9,13 +9,17 @@
     "format": "prettier --write \"src/**/*.{ts,js}\"",
     "lint": "eslint 'src/**/*.{ts,js}'",
     "build": "tsc && (if exist dist\\view rmdir /s /q dist\\view) && xcopy /s /i /y src\\view dist\\view",
-    "test": ""
+    "test": "mocha --require tsx --extensions ts --spec \"test/**/*.test.ts\""
   },
   "author": "Sebastian Moritz",
   "license": "ISC",
   "devDependencies": {
+    "@types/axios": "^0.14.4",
+    "@types/chai": "^5.2.3",
     "@types/dotenv": "^6.1.1",
+    "@types/mocha": "^10.0.10",
     "@types/node": "^24.9.2",
+    "@types/uuid": "^11.0.0",
     "@typescript-eslint/eslint-plugin": "^8.46.2",
     "@typescript-eslint/parser": "^8.46.2",
     "chai": "^6.2.0",
@@ -25,13 +29,18 @@
     "eslint-plugin-import": "^2.32.0",
     "mocha": "^11.7.4",
     "prettier": "^3.6.2",
+    "tsx": "^4.20.6",
     "typescript": "^5.9.3"
   },
   "dependencies": {
+    "@hapi/cookie": "^12.0.1",
     "@hapi/hapi": "^21.4.3",
     "@hapi/inert": "^7.1.0",
     "@hapi/vision": "^7.0.3",
+    "axios": "^1.13.2",
     "dotenv": "^17.2.3",
-    "handlebars": "^4.7.8"
+    "handlebars": "^4.7.8",
+    "lowdb": "^7.0.1",
+    "uuid": "^13.0.0"
   }
 }

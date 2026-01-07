@@ -1,0 +1,63 @@
+{
+  "users": [
+    {
+      "email": "ted.mosby@newyork.com",
+      "password": "architect123",
+      "firstName": "Ted",
+      "lastName": "Mosby",
+      "_id": "644cd94e-75a7-43bc-ab53-51884a540d04",
+      "aboutMe": null,
+      "imageUrl": null
+    },
+    {
+      "email": "barny.stinson@newyork.com",
+      "password": "suitUp456",
+      "firstName": "Barny",
+      "lastName": "Stinson",
+      "_id": "83924c84-c0f2-49d5-bea9-cde9477bd361",
+      "aboutMe": null,
+      "imageUrl": null
+    },
+    {
+      "email": "robin.scherbatsky@newyork.com",
+      "password": "canadian789",
+      "firstName": "Robin",
+      "lastName": "Scherbatsky",
+      "_id": "2b04f094-b47a-43f5-b26d-30b91d08dc8e",
+      "aboutMe": null,
+      "imageUrl": null
+    }
+  ],
+  "clubs": [
+    {
+      "name": "DLRG Regensburg",
+      "description": "Deutsche Lebens-Rettungs-Gesellschaft Ortsgruppe Regensburg",
+      "latitude": 49.0195,
+      "longitude": 12.0974,
+      "category": "public",
+      "_id": "819b7ea2-7bfc-4bb1-aa72-68c8a6398bdb",
+      "userId": "1d9ac5a8-0b93-4e3d-adce-1348d3e40d00",
+      "imageUrls": null
+    },
+    {
+      "name": "DLRG Amberg",
+      "description": "Deutsche Lebens-Rettungs-Gesellschaft Ortsgruppe Amberg",
+      "latitude": 49.4447,
+      "longitude": 11.8583,
+      "category": "public",
+      "_id": "fa6ec922-42aa-4d23-8868-c47a3a31d6f9",
+      "userId": "1d9ac5a8-0b93-4e3d-adce-1348d3e40d00",
+      "imageUrls": null
+    },
+    {
+      "name": "DLRG Furth im Wald",
+      "description": "Deutsche Lebens-Rettungs-Gesellschaft Ortsgruppe Furth im Wald",
+      "latitude": 49.3089,
+      "longitude": 12.8447,
+      "category": "public",
+      "_id": "cfc8cd6f-2a22-41dc-a910-0559d8fa5b2c",
+      "userId": "1d9ac5a8-0b93-4e3d-adce-1348d3e40d00",
+      "imageUrls": null
+    }
+  ]
+}
