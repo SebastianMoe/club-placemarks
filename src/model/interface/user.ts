@@ -6,6 +6,7 @@ export interface User {
   lastName: string;
   aboutMe: string | null;
   imageUrl: string | null;
+  scope: string[];
 }
 
-export type NewUser = Omit<User, "_id" | "aboutMe" | "imageUrl">;
+export type NewUser = Omit<User, "_id" | "aboutMe" | "imageUrl" | "scope">;

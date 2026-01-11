@@ -7,6 +7,9 @@
       <div class="navbar-item">
         <div class="buttons">
           <a id="dashboard" class="button" href="/dashboard"> Dashboard </a>
+          {{#if isAdmin}}
+            <a id="admin" class="button" href="/admin"> Admin </a>
+          {{/if}}
           <a id="logout" class="button" href="/logout"> Logout </a>
         </div>
       </div>

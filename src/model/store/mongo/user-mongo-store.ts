@@ -9,6 +9,7 @@ const userSchema = new Schema<User>({
   lastName: String,
   aboutMe: String,
   imageUrl: String,
+  scope: [String],
 });
 
 const UserMongoose = model<User>("User", userSchema);
@@ -32,7 +33,7 @@ export const userMongoStore: UserStore = {
   },
 
   async create(newUser: NewUser): Promise<User> {
-    const user = new UserMongoose(newUser);
+    const user = new UserMongoose({ ...newUser, scope: ["user"] });
     await user.save();
     return { ...user.toObject(), _id: user._id.toString() } as User;
   },

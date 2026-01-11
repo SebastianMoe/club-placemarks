@@ -3,6 +3,7 @@ import { indexController } from "./controller/indexController.js";
 import { accountsController } from "./controller/accountsController.js";
 import { clubsController } from "./controller/clubsController.js";
 import { dashboardController } from "./controller/dashboardController.js";
+import { adminController } from "./controller/adminController.js";
 
 export const webRoutes: ServerRoute[] = [
   // Authentication routes
@@ -12,6 +13,10 @@ export const webRoutes: ServerRoute[] = [
   { method: "GET", path: "/login", options: { auth: false }, ...accountsController.showLogin },
   { method: "POST", path: "/authenticate", options: { auth: false }, ...accountsController.login },
   { method: "GET", path: "/logout", ...accountsController.logout },
+
+  // Admin routes
+  { method: "GET", path: "/admin", options: { auth: { scope: ["admin"] } }, ...adminController.index },
+  { method: "GET", path: "/admin/deleteuser/{id}", options: { auth: { scope: ["admin"] } }, ...adminController.deleteUser },
 
   // Dashboard routes
   { method: "GET", path: "/dashboard", ...dashboardController.index },
