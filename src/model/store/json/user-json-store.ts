@@ -23,9 +23,10 @@ export const userJsonStore: UserStore = {
 
   async create(newUser: NewUser): Promise<User> {
     await jsonFile.read();
-    const user: User = { ...newUser, _id: v4(), aboutMe: null, imageUrl: null } as User;
+    const user: User = { ...newUser, _id: v4(), aboutMe: null, imageUrl: null, scope: ["user"] } as User;
     jsonFile.data.users.push(user);
     await jsonFile.write();
+
     return user;
   },
 
