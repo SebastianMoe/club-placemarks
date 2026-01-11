@@ -22,12 +22,15 @@ export const clubJsonStore: ClubStore = {
 
   async create(newClub: NewClub, userId: string): Promise<Club> {
     await jsonFile.read();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { imageUrl, ...clubData } = newClub;
     const club: Club = { 
-      ...newClub, 
+      ...clubData, 
+      category: newClub.category || "other",
       _id: v4(), 
       userId,
       description: newClub.description || null,
-      imageUrls: null
+      imageUrls: newClub.imageUrl ? [newClub.imageUrl] : []
     } as Club;
     jsonFile.data.clubs.push(club);
     await jsonFile.write();
