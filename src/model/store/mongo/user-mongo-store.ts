@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, isValidObjectId } from "mongoose";
 import type { User, NewUser } from "../../interface/user.js";
 import type { UserStore } from "../../db.js";
 
@@ -21,6 +21,7 @@ export const userMongoStore: UserStore = {
   },
 
   async getById(userId: string): Promise<User | null> {
+    if (!isValidObjectId(userId)) return null;
     const user = await UserMongoose.findOne({ _id: userId }).lean();
     if (!user) return null;
     return { ...user, _id: user._id.toString() } as User;

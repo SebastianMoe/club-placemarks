@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, isValidObjectId } from "mongoose";
 import type { Club, NewClub } from "../../interface/club.js";
 import type { ClubStore } from "../../db.js";
 
@@ -24,6 +24,7 @@ export const clubMongoStore: ClubStore = {
   },
 
   async getById(clubId: string): Promise<Club | null> {
+    if (!isValidObjectId(clubId)) return null;
     const club = await ClubMongoose.findOne({ _id: clubId }).lean();
     if (!club) return null;
     return { ...club, _id: club._id.toString() } as Club;
