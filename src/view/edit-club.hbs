@@ -14,6 +14,24 @@
             <label class="label">Description</label>
             <textarea class="textarea" placeholder="Enter description (optional)" name="description">{{club.description}}</textarea>
           </div>
+          <div class="field">
+            <label class="label">Category</label>
+            <div class="control">
+              <div class="select">
+                <select name="category">
+                  <option value="education" {{#if (eq club.category "education")}}selected{{/if}}>Education</option>
+                  <option value="sports" {{#if (eq club.category "sports")}}selected{{/if}}>Sports</option>
+                  <option value="music" {{#if (eq club.category "music")}}selected{{/if}}>Music</option>
+                  <option value="rescue" {{#if (eq club.category "rescue")}}selected{{/if}}>Rescue</option>
+                  <option value="other" {{#if (eq club.category "other")}}selected{{/if}}>Other</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="field">
+             <label class="label">Image URL</label>
+             <input class="input" type="text" placeholder="Enter image URL" name="imageUrls" value="{{club.imageUrls.[0]}}">
+          </div>
           <div class="columns">
             <div class="column">
               <div class="field">
