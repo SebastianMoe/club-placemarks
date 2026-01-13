@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, isValidObjectId } from "mongoose";
 import type { Club, NewClub } from "../../interface/club.js";
 import type { ClubStore } from "../../db.js";
 
@@ -7,6 +7,7 @@ const clubSchema = new Schema<Club>({
   description: String,
   latitude: Number,
   longitude: Number,
+  category: String,
   imageUrls: [String],
   userId: {
     type: String, // Storing reference as string to match User._id string type in interface
@@ -23,6 +24,7 @@ export const clubMongoStore: ClubStore = {
   },
 
   async getById(clubId: string): Promise<Club | null> {
+    if (!isValidObjectId(clubId)) return null;
     const club = await ClubMongoose.findOne({ _id: clubId }).lean();
     if (!club) return null;
     return { ...club, _id: club._id.toString() } as Club;
@@ -34,7 +36,13 @@ export const clubMongoStore: ClubStore = {
   },
 
   async create(newClub: NewClub, userId: string): Promise<Club> {
-    const club = new ClubMongoose({ ...newClub, userId });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { imageUrl, ...clubData } = newClub;
+    const club = new ClubMongoose({ 
+      ...clubData, 
+      userId,
+      imageUrls: imageUrl ? [imageUrl] : [] 
+    });
     await club.save();
     return { ...club.toObject(), _id: club._id.toString() } as Club;
   },

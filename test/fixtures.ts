@@ -56,3 +56,12 @@ export const testClubs: NewClub[] = [
     longitude: 12.8447,
   },
 ];
+
+export const updatedTestClub = {
+  name: "DLRG Regensburg Updated",
+  description: "Updated Description",
+  latitude: 50.0,
+  longitude: 13.0,
+  category: "rescue",
+  imageUrls: ["http://example.com/image.png"]
+};

@@ -47,6 +47,10 @@ const init = async () => {
 
   server.auth.default("session");
 
+  Handlebars.registerHelper("eq", (a, b) => {
+    return a === b;
+  });
+
   // register template engine
   server.views({
     engines: {

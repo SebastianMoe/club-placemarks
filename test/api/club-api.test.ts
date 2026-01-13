@@ -1,8 +1,9 @@
 import { suite, test, setup, teardown } from "mocha";
 import { assert } from "chai";
-import { maggie, testClub, testClubs } from "../fixtures.ts";
+import { maggie, testClub, testClubs, updatedTestClub } from "../fixtures.ts";
 import { assertSubset } from "../test-utils.ts";
 import type { Club } from "../../src/model/interface/club.ts";
+
 import type { User } from "../../src/model/interface/user.ts";
 import { clubService } from "./api-service.ts";
 
@@ -47,6 +48,16 @@ suite("Club API tests", () => {
     const returnedClub = await clubService.getClub(clubs[0]._id);
     assert.deepEqual(clubs[0], returnedClub);
   });
+
+  test("update a club", async () => {
+    const clubToUpdate = await clubService.createClub(testClub, user._id);
+    const updatedClub = { ...clubToUpdate, ...updatedTestClub } as Club;
+    const returnedClub = await clubService.updateClub(updatedClub);
+    assertSubset(updatedClub, returnedClub);
+    assert.deepEqual(returnedClub.imageUrls, updatedTestClub.imageUrls);
+    assert.equal(returnedClub.category, updatedTestClub.category);
+  });
+
 
   test("get a club - bad id", async () => {
     try {

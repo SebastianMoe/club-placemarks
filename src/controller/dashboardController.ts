@@ -13,7 +13,7 @@ export const dashboardController = {
         user: loggedInUser,
         clubs: clubs,
         loggedIn: true,
-        isAdmin: loggedInUser.scope.includes("admin"),
+        isAdmin: loggedInUser.scope?.includes("admin") ?? false,
       };
       return h.view("dashboard", viewData);
     },
@@ -29,6 +29,8 @@ export const dashboardController = {
         description: payload.description || null,
         latitude: payload.latitude,
         longitude: payload.longitude,
+        category: payload.category || "other",
+        imageUrl: payload.imageUrl || undefined,
       };
       
       await db.clubStore.create(newClub, loggedInUser._id);
