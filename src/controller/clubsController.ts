@@ -83,8 +83,8 @@ export const clubsController = {
         description: payload.description || null,
         latitude: payload.latitude,
         longitude: payload.longitude,
-        category: (payload as any).category || existingClub.category,
-        imageUrls: (payload as any).imageUrls || existingClub.imageUrls,
+        category: payload.category || existingClub.category,
+        imageUrls: payload.imageUrl ? [payload.imageUrl] : existingClub.imageUrls,
         userId: user._id,
       };
 

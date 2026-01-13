@@ -13,7 +13,7 @@ export const dashboardController = {
         user: loggedInUser,
         clubs: clubs,
         loggedIn: true,
-        isAdmin: loggedInUser.scope.includes("admin"),
+        isAdmin: loggedInUser.scope?.includes("admin") ?? false,
       };
       return h.view("dashboard", viewData);
     },
