@@ -2,6 +2,7 @@ import Hapi from "@hapi/hapi";
 import Inert from "@hapi/inert";
 import Vision from "@hapi/vision";
 import Cookie from "@hapi/cookie";
+import HapiSwagger from "hapi-swagger";
 import dotenv from "dotenv";
 import { fileURLToPath } from "node:url";
 import * as path from "node:path";
@@ -27,12 +28,27 @@ const init = async () => {
   await dataBase.init("mongo");
 
   const server = Hapi.server({
-    port: process.env.PORT,
-    host: process.env.HOST,
+    port: process.env.PORT || 4000,
+    routes: { cors: true },
   });
 
   // register plugins
-  await server.register([Vision, Inert, Cookie]);
+  const swaggerOptions = {
+    info: {
+      title: "Playtime API",
+      version: "0.1",
+    },
+  };
+
+  await server.register([
+    Inert,
+    Vision,
+    Cookie,
+    {
+      plugin: HapiSwagger,
+      options: swaggerOptions,
+    },
+  ]);
 
   // configure cookie authentication
   server.auth.strategy("session", "cookie", {

@@ -40,6 +40,8 @@
     "axios": "^1.13.2",
     "dotenv": "^17.2.3",
     "handlebars": "^4.7.8",
+    "hapi-swagger": "^17.3.2",
+    "joi": "^17.13.3",
     "lowdb": "^7.0.1",
     "mongoose": "^9.1.2",
     "uuid": "^13.0.0"
