@@ -28,8 +28,8 @@ const init = async () => {
   await dataBase.init("mongo");
 
   const server = Hapi.server({
-    port: process.env.PORT,
-    host: process.env.HOST,
+    port: process.env.PORT || 4000,
+    routes: { cors: true },
   });
 
   // register plugins
