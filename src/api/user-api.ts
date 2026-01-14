@@ -11,7 +11,6 @@ interface UserCredentials {
 
 export const userApi = {
   find: {
-    auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
         const users = await db.userStore.getAll();
@@ -27,7 +26,6 @@ export const userApi = {
   },
 
   findOne: {
-    auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
         const user = await db.userStore.getById(request.params.id);
@@ -47,7 +45,6 @@ export const userApi = {
   },
 
   create: {
-    auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
         const payload = request.payload as NewUser;
@@ -68,7 +65,6 @@ export const userApi = {
   },
 
   deleteAll: {
-    auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
         await db.userStore.deleteAll();
@@ -82,7 +78,6 @@ export const userApi = {
   },
 
   authenticate: {
-    auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
         const credentials = request.payload as UserCredentials;
