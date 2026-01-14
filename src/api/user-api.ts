@@ -2,6 +2,7 @@ import Boom from "@hapi/boom";
 import type { Request, ResponseToolkit } from "@hapi/hapi";
 import { dataBase as db } from "../model/db.js";
 import type { NewUser, User } from "../model/interface/user.js";
+import { IdSpec, UserArray, UserCredentialsSpec, UserSpec, UserSpecPlus } from "./joi-schemas.js";
 
 interface UserCredentials {
   email: string;
@@ -10,6 +11,7 @@ interface UserCredentials {
 
 export const userApi = {
   find: {
+    auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
         const users = await db.userStore.getAll();
@@ -18,9 +20,14 @@ export const userApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
+    tags: ["api"],
+    description: "Get all users",
+    notes: "Returns all users",
+    response: { schema: UserArray, failAction: "ignore" },
   },
 
   findOne: {
+    auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
         const user = await db.userStore.getById(request.params.id);
@@ -32,9 +39,15 @@ export const userApi = {
         return Boom.serverUnavailable("No User with this id");
       }
     },
+    tags: ["api"],
+    description: "Find a User",
+    notes: "Returns a user",
+    validate: { params: { id: IdSpec }, failAction: "ignore" },
+    response: { schema: UserSpecPlus, failAction: "ignore" },
   },
 
   create: {
+    auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
         const payload = request.payload as NewUser;
@@ -47,9 +60,15 @@ export const userApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
+    tags: ["api"],
+    description: "Create a User",
+    notes: "Returns the newly created user",
+    validate: { payload: UserSpec, failAction: "ignore" },
+    response: { schema: UserSpecPlus, failAction: "ignore" },
   },
 
   deleteAll: {
+    auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
         await db.userStore.deleteAll();
@@ -58,9 +77,12 @@ export const userApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
+    tags: ["api"],
+    description: "Delete all users",
   },
 
   authenticate: {
+    auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
         const credentials = request.payload as UserCredentials;
@@ -77,5 +99,9 @@ export const userApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
+    tags: ["api"],
+    description: "Authenticate a User",
+    notes: "If user has valid credentials",
+    validate: { payload: UserCredentialsSpec, failAction: "ignore" },
   },
 };

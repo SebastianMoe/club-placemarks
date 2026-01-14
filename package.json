@@ -17,6 +17,9 @@
     "@types/axios": "^0.14.4",
     "@types/chai": "^5.2.3",
     "@types/dotenv": "^6.1.1",
+    "@types/hapi__hapi": "^21.0.0",
+    "@types/hapi__inert": "^7.1.0",
+    "@types/hapi__vision": "^7.0.2",
     "@types/mocha": "^10.0.10",
     "@types/node": "^24.9.2",
     "@types/uuid": "^11.0.0",
@@ -40,6 +43,8 @@
     "axios": "^1.13.2",
     "dotenv": "^17.2.3",
     "handlebars": "^4.7.8",
+    "hapi-swagger": "^17.3.2",
+    "joi": "^17.13.3",
     "lowdb": "^7.0.1",
     "mongoose": "^9.1.2",
     "uuid": "^13.0.0"

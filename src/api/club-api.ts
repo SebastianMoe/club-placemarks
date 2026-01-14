@@ -2,9 +2,11 @@ import Boom from "@hapi/boom";
 import type { Request, ResponseToolkit } from "@hapi/hapi";
 import { dataBase as db } from "../model/db.js";
 import type { NewClub, Club } from "../model/interface/club.js";
+import { ClubArray, ClubSpec, ClubSpecPlus, IdSpec } from "./joi-schemas.js";
 
 export const clubApi = {
   find: {
+    auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
         const clubs = await db.clubStore.getAll();
@@ -13,9 +15,14 @@ export const clubApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
+    tags: ["api"],
+    description: "Get all clubs",
+    notes: "Returns all clubs",
+    response: { schema: ClubArray, failAction: "ignore" },
   },
 
   findOne: {
+    auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
         const club = await db.clubStore.getById(request.params.id);
@@ -27,9 +34,15 @@ export const clubApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
+    tags: ["api"],
+    description: "Find a Club",
+    notes: "Returns a club",
+    validate: { params: { id: IdSpec }, failAction: "ignore" },
+    response: { schema: ClubSpecPlus, failAction: "ignore" },
   },
 
   findByUser: {
+    auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
         const clubs = await db.clubStore.getByUserId(request.params.userId);
@@ -38,9 +51,15 @@ export const clubApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
+    tags: ["api"],
+    description: "Find Clubs by User",
+    notes: "Returns all clubs for a user",
+    validate: { params: { userId: IdSpec }, failAction: "ignore" },
+    response: { schema: ClubArray, failAction: "ignore" },
   },
 
   create: {
+    auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
         const payload = request.payload as NewClub & { userId: string };
@@ -53,9 +72,15 @@ export const clubApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
+    tags: ["api"],
+    description: "Create a Club",
+    notes: "Returns the newly created club",
+    validate: { payload: ClubSpec, failAction: "ignore" },
+    response: { schema: ClubSpecPlus, failAction: "ignore" },
   },
 
   update: {
+    auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
         const club = request.payload as Club;
@@ -68,9 +93,15 @@ export const clubApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
+    tags: ["api"],
+    description: "Update a Club",
+    notes: "Returns the updated club",
+    validate: { payload: ClubSpecPlus, failAction: "ignore" },
+    response: { schema: ClubSpecPlus, failAction: "ignore" },
   },
 
   deleteOne: {
+    auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
         const club = await db.clubStore.deleteById(request.params.id);
@@ -82,9 +113,14 @@ export const clubApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
+    tags: ["api"],
+    description: "Delete a Club",
+    notes: "Returns 204 if successful",
+    validate: { params: { id: IdSpec }, failAction: "ignore" },
   },
 
   deleteAll: {
+    auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
         await db.clubStore.deleteAll();
@@ -93,5 +129,8 @@ export const clubApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
+    tags: ["api"],
+    description: "Delete all clubs",
+    notes: "Returns 204 if successful",
   },
 };
