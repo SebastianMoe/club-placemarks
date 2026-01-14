@@ -31,6 +31,7 @@ export const dashboardController = {
         longitude: payload.longitude,
         category: payload.category || "other",
         imageUrl: payload.imageUrl || undefined,
+        imageUrls: null,
       };
       
       await db.clubStore.create(newClub, loggedInUser._id);

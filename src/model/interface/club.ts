@@ -9,4 +9,4 @@ export interface Club {
   userId: string;
 }
 
-export type NewClub = Omit<Club, "_id" | "userId" | "imageUrls"> & { imageUrl?: string };
+export type NewClub = Omit<Club, "_id" | "userId"> & { imageUrl?: string };

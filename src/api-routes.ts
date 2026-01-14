@@ -57,7 +57,15 @@ export const apiRoutes: ServerRoute[] = [
   {
     method: "POST",
     path: "/api/clubs",
-    options: { auth: false, tags: ["api"] },
+    options: {
+      auth: false, 
+      tags: ["api"],
+      payload: {
+        multipart: true, 
+        output: "file",  
+        maxBytes: 10000000, 
+      },
+    },
     handler: clubApi.create.handler,
   },
   {
