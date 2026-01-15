@@ -60,6 +60,7 @@ export const clubApi = {
   },
 
   create: {
+    auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
         const payload = request.payload as any;
@@ -94,6 +95,11 @@ export const clubApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
+    tags: ["api"],
+    description: "Create a Club",
+    notes: "Returns the newly created club",
+    validate: { payload: ClubSpec, failAction: "ignore" },
+    response: { schema: ClubSpecPlus, failAction: "ignore" },
   },
 
   update: {
