@@ -3,6 +3,7 @@ import type { Request, ResponseToolkit } from "@hapi/hapi";
 import { dataBase as db } from "../model/db.js";
 import type { NewClub, Club } from "../model/interface/club.js";
 import { ClubArray, ClubSpec, ClubSpecPlus, IdSpec } from "./joi-schemas.js";
+import { imageStore } from "../model/store/image-store.js";
 
 export const clubApi = {
   find: {
@@ -62,13 +63,35 @@ export const clubApi = {
     auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
-        const payload = request.payload as NewClub & { userId: string };
-        const club = await db.clubStore.create(payload, payload.userId);
+        const payload = request.payload as any;
+        
+        let imageUrl = "";
+        
+        if (payload.image) {
+            const url = await imageStore.uploadImage(payload.image);
+            if (url) {
+                imageUrl = url;
+            }
+        }
+
+        const newClubData = {
+            name: payload.name,
+            description: payload.description,
+            category: payload.category,
+            latitude: Number(payload.latitude), 
+            longitude: Number(payload.longitude),
+            imageUrls: imageUrl ? [imageUrl] : [], 
+            userId: payload.userId 
+        };
+
+        const club = await db.clubStore.create(newClubData, payload.userId);
+        
         if (club) {
           return h.response(club).code(201);
         }
         return Boom.badImplementation("Error creating club");
       } catch (err) {
+        console.log(err);
         return Boom.serverUnavailable("Database Error");
       }
     },

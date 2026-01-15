@@ -31,6 +31,7 @@ export const dashboardController = {
         longitude: payload.longitude,
         category: payload.category || "other",
         imageUrl: payload.imageUrl || undefined,
+        imageUrls: null,
       };
       
       await db.clubStore.create(newClub, loggedInUser._id);
@@ -43,7 +44,6 @@ export const dashboardController = {
       const club = await db.clubStore.getById(request.params.id);
       const loggedInUser = request.auth.credentials as unknown as User;
       
-      // Nur löschen, wenn der User der Besitzer ist
       if (club && club.userId === loggedInUser._id) {
         await db.clubStore.deleteById(club._id);
       }

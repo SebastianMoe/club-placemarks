@@ -10,7 +10,7 @@ const clubSchema = new Schema<Club>({
   category: String,
   imageUrls: [String],
   userId: {
-    type: String, // Storing reference as string to match User._id string type in interface
+    type: String, 
     ref: "User",
   },
 });
@@ -36,12 +36,12 @@ export const clubMongoStore: ClubStore = {
   },
 
   async create(newClub: NewClub, userId: string): Promise<Club> {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { imageUrl, ...clubData } = newClub;
-    const club = new ClubMongoose({ 
-      ...clubData, 
+    const imageUrls = newClub.imageUrls || (newClub.imageUrl ? [newClub.imageUrl] : []);
+
+    const club = new ClubMongoose({
+      ...newClub,
       userId,
-      imageUrls: imageUrl ? [imageUrl] : [] 
+      imageUrls: imageUrls
     });
     await club.save();
     return { ...club.toObject(), _id: club._id.toString() } as Club;
