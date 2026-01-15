@@ -85,7 +85,7 @@ export class ClubService {
     return response.data;
   }
 
-  // Club API methods
+  // Member Stats API methods
   async createMemberStats(clubId: string, stats: NewMemberStats) {
     const response = await this.axios.post(`/api/clubs/${clubId}/stats`, stats);
     return response.data;
