@@ -1,6 +1,8 @@
 import type { ServerRoute } from "@hapi/hapi";
 import { userApi } from "./api/user-api.js";
 import { clubApi } from "./api/club-api.js";
+import { memberStatsApi } from "./api/member-stats-api.js";
+import { createMemberStatsSchema } from "./api/joi-schemas.js";
 
 export const apiRoutes: ServerRoute[] = [
   // User API routes
@@ -86,4 +88,36 @@ export const apiRoutes: ServerRoute[] = [
     options: { auth: false, tags: ["api"] },
     handler: clubApi.deleteAll.handler,
   },
+
+  // Member Stats API routes
+  {
+    method: "POST",
+    path: "/api/clubs/{id}/stats",
+    options: {
+      auth: false, 
+      tags: ["api"],
+      validate: {
+        payload: createMemberStatsSchema
+      }
+    },
+    handler: memberStatsApi.create.handler,
+  },
+  {
+    method: "GET",
+    path: "/api/clubs/{id}/stats",
+    options: {
+      auth: false,
+      tags: ["api"],
+    },
+    handler: memberStatsApi.findByClub.handler,
+  },
+  {
+    method: "DELETE",
+    path: "/api/stats", 
+    options: {
+      auth: false,
+      tags: ["api"],
+    },
+    handler: memberStatsApi.deleteAll.handler,
+  }
 ];

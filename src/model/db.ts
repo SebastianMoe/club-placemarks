@@ -2,10 +2,12 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import type { NewUser, User } from "./interface/user.js";
 import type { NewClub, Club } from "./interface/club.js";
+import type { NewMemberStats, MemberStats } from "./interface/member-stats.js";
 import { userJsonStore } from "./store/json/user-json-store.js";
 import { clubJsonStore } from "./store/json/club-json-store.js";
 import { userMongoStore } from "./store/mongo/user-mongo-store.js";
 import { clubMongoStore } from "./store/mongo/club-mongo-store.js";
+import { memberStatsMongoStore } from "./store/mongo/member-stats-mongo-store.js"; 
 
 dotenv.config();
 
@@ -43,9 +45,17 @@ export interface ClubStore {
   deleteById(clubId: Club["_id"]): Promise<Club | null>;
 }
 
+export interface MemberStatsStore {
+  getAll(): Promise<MemberStats[]>;
+  getByClubId(clubId: string): Promise<MemberStats[]>;
+  create(stats: NewMemberStats): Promise<MemberStats>;
+  deleteAll(): Promise<void>;
+}
+
 interface DataBase {
   userStore: UserStore | null;
   clubStore: ClubStore | null;
+  memberStatsStore: MemberStatsStore | null;
 
   init(storeType: StoreType): Promise<void>;
 }
@@ -53,6 +63,7 @@ interface DataBase {
 export const dataBase: DataBase = {
   userStore: null,
   clubStore: null,
+  memberStatsStore: null,
 
   async init(storeType: StoreType) {
     if (storeType === "json") {
@@ -61,6 +72,7 @@ export const dataBase: DataBase = {
     } else if (storeType === "mongo") {
       this.userStore = userMongoStore;
       this.clubStore = clubMongoStore;
+      this.memberStatsStore = memberStatsMongoStore;
       if (process.env.MONGO_URL) {
         await mongoose.connect(process.env.MONGO_URL);
         console.log("Connected to MongoDB");
