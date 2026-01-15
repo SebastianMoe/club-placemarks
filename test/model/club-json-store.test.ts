@@ -16,10 +16,8 @@ suite("Club Model tests", () => {
     await db.userStore!.deleteAll();
     createdClubs = [];
     
-    // Create a test user first
     testUser = await db.userStore!.create(maggie);
     
-    // Create test clubs
     for (let i = 0; i < testClubs.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
       const club = await db.clubStore!.create(testClubs[i], testUser._id);

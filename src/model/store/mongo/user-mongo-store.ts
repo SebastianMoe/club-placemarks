@@ -40,7 +40,6 @@ export const userMongoStore: UserStore = {
   },
 
   async update(user: User): Promise<User | null> {
-      // Don't update _id, validation might fail if passed
       const { _id, ...updateData } = user;
       const updatedUser = await UserMongoose.findOneAndUpdate({ _id: _id }, updateData, { new: true }).lean();
       if (!updatedUser) return null;

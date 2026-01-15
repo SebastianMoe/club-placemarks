@@ -73,5 +73,4 @@ export const dataBase: DataBase = {
   },
 };
 
-// Alias for shorter access
 export const db = dataBase;

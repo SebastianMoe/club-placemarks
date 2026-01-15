@@ -90,7 +90,7 @@ export const clubApi = {
         }
         return Boom.badImplementation("Error creating club");
       } catch (err) {
-        console.log(err); // Debugging
+        console.log(err);
         return Boom.serverUnavailable("Database Error");
       }
     },
