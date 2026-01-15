@@ -1,6 +1,7 @@
 import axios, { type AxiosInstance } from "axios";
 import type { NewUser, User } from "../../src/model/interface/user.ts";
 import type { NewClub, Club } from "../../src/model/interface/club.ts";
+import type { NewMemberStats } from "../../src/model/interface/member-stats.js";
 
 export class ClubService {
   clubUrl = "http://localhost:3000";
@@ -83,7 +84,22 @@ export class ClubService {
     const response = await this.axios.delete("/api/clubs");
     return response.data;
   }
+
+  // Member Stats API methods
+  async createMemberStats(clubId: string, stats: NewMemberStats) {
+    const response = await this.axios.post(`/api/clubs/${clubId}/stats`, stats);
+    return response.data;
+  }
+
+  async getMemberStats(clubId: string) {
+    const response = await this.axios.get(`/api/clubs/${clubId}/stats`);
+    return response.data;
+  }
+
+  async deleteAllStats() {
+    const response = await this.axios.delete("/api/stats");
+    return response.data;
+  }
 }
 
 export const clubService = new ClubService();
-

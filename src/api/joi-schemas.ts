@@ -41,3 +41,12 @@ export const ClubSpecPlus = ClubSpec.keys({
 }).label("ClubPlus");
 
 export const ClubArray = Joi.array().items(ClubSpecPlus).label("ClubArray");
+
+export const createMemberStatsSchema = Joi.object({
+  total: Joi.number().required(),
+  adultMale: Joi.number().required(),
+  adultFemale: Joi.number().required(),
+  youthMale: Joi.number().required(),
+  youthFemale: Joi.number().required(),
+  date: Joi.date().required(),
+});

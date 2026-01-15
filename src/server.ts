@@ -45,9 +45,7 @@ const init = async () => {
 
   server.auth.default("session");
 
-  Handlebars.registerHelper("eq", (a, b) => {
-    return a === b;
-  });
+  Handlebars.registerHelper("eq", (a, b) => a === b);
 
   server.views({
     engines: {
