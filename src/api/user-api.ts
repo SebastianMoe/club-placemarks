@@ -103,7 +103,7 @@ export const userApi = {
           return Boom.unauthorized("Invalid password");
         }
         
-        return h.response({ success: true, userId: user._id }).code(200);
+        return h.response({ success: true, userId: user._id, role: user.scope }).code(200);
       } catch (err) {
         return Boom.serverUnavailable("Database Error");
       }
