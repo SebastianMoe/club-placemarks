@@ -1,5 +1,6 @@
 import Boom from "@hapi/boom";
 import type { Request, ResponseToolkit } from "@hapi/hapi";
+import bcrypt from "bcrypt";
 import { dataBase as db } from "../model/db.js";
 import type { NewUser, User } from "../model/interface/user.js";
 import { IdSpec, UserArray, UserCredentialsSpec, UserSpec, UserSpecPlus } from "./joi-schemas.js";
@@ -51,6 +52,11 @@ export const userApi = {
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
         const payload = request.payload as NewUser;
+
+        const saltRounds = 10;
+        const hash = await bcrypt.hash(payload.password, saltRounds);
+        payload.password = hash;
+
         const user = await db.userStore.create(payload);
         if (user) {
           return h.response(user).code(201);
@@ -87,10 +93,13 @@ export const userApi = {
       try {
         const credentials = request.payload as UserCredentials;
         const user = await db.userStore.getByEmail(credentials.email);
+        
         if (!user) {
           return Boom.unauthorized("User not found");
         }
-        if (user.password !== credentials.password) {
+
+        const isValid = await bcrypt.compare(credentials.password, user.password);
+        if (!isValid) {
           return Boom.unauthorized("Invalid password");
         }
         

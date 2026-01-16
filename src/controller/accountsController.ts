@@ -1,4 +1,5 @@
 import type { Request, ResponseToolkit } from "@hapi/hapi";
+import bcrypt from "bcrypt";
 import { dataBase } from "../model/db.js";
 import type { NewUser, User } from "../model/interface/user.js";
 
@@ -25,9 +26,13 @@ export const accountsController = {
   signup: {
     handler: async function (request: Request, h: ResponseToolkit) {
       const payload = request.payload as NewUser;
+
+      const saltRounds = 10;
+      const hashedPassword = await bcrypt.hash(payload.password, saltRounds);
+
       const newUser: NewUser = {
         email: payload.email,
-        password: payload.password,
+        password: hashedPassword,
         firstName: payload.firstName,
         lastName: payload.lastName,
       };
@@ -48,7 +53,7 @@ export const accountsController = {
       const { email, password } = request.payload as { email: string; password: string };
       const user = await dataBase.userStore.getByEmail(email);
 
-      if (!user || user.password !== password) {
+      if (!user || !(await bcrypt.compare(password, user.password))) {
         return h.redirect("/");
       }
 
