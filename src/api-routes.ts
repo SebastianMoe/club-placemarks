@@ -141,7 +141,7 @@ export const apiRoutes: ServerRoute[] = [
   },
   {
     method: "DELETE",
-    path: "/api/stats", 
+    path: "/api/clubs/{clubId}/stats/{id}", 
     options: {
       auth: false,
       tags: ["api"],
