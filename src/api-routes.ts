@@ -1,6 +1,7 @@
 import type { ServerRoute } from "@hapi/hapi";
 import { userApi } from "./api/user-api.js";
 import { clubApi } from "./api/club-api.js";
+import { eventApi } from "./api/event-api.js";
 import { memberStatsApi } from "./api/member-stats-api.js";
 import { createMemberStatsSchema } from "./api/joi-schemas.js";
 
@@ -23,6 +24,12 @@ export const apiRoutes: ServerRoute[] = [
     path: "/api/users",
     options: { auth: false, tags: ["api"] },
     handler: userApi.create.handler,
+  },
+  {
+    method: "DELETE",
+    path: "/api/users/{id}",
+    options: { auth: false, tags: ["api"] },
+    handler: userApi.deleteOne.handler,
   },
   {
     method: "DELETE",
@@ -134,11 +141,37 @@ export const apiRoutes: ServerRoute[] = [
   },
   {
     method: "DELETE",
-    path: "/api/stats", 
+    path: "/api/clubs/{clubId}/stats/{id}", 
     options: {
       auth: false,
       tags: ["api"],
     },
     handler: memberStatsApi.deleteAll.handler,
-  }
+  },
+
+  // Event API Routes
+  {
+    method: "GET",
+    path: "/api/events",
+    options: { auth: false, tags: ["api"] },
+    handler: eventApi.find.handler,
+  },
+  {
+    method: "GET",
+    path: "/api/clubs/{clubId}/events", // Events pro Club
+    options: { auth: false, tags: ["api"] },
+    handler: eventApi.findByClub.handler,
+  },
+  {
+    method: "POST",
+    path: "/api/events",
+    options: { auth: false, tags: ["api"] },
+    handler: eventApi.create.handler,
+  },
+  {
+    method: "DELETE",
+    path: "/api/events/{id}",
+    options: { auth: false, tags: ["api"] },
+    handler: eventApi.deleteOne.handler,
+  },
 ];
