@@ -9,7 +9,7 @@ const eventSchema = new Schema<Event>({
   latitude: Number,
   longitude: Number,
   clubId: {
-    type: Schema.Types.ObjectId,
+    type: String,
     ref: "Club",
   },
 });
