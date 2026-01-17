@@ -27,6 +27,12 @@ export const apiRoutes: ServerRoute[] = [
   },
   {
     method: "DELETE",
+    path: "/api/users/{id}",
+    options: { auth: false, tags: ["api"] },
+    handler: userApi.deleteOne.handler,
+  },
+  {
+    method: "DELETE",
     path: "/api/users",
     options: { auth: false, tags: ["api"] },
     handler: userApi.deleteAll.handler,

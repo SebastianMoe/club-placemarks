@@ -73,6 +73,25 @@ export const userApi = {
     response: { schema: UserSpecPlus, failAction: "ignore" },
   },
 
+  deleteOne: {
+    auth: false,
+    handler: async function (request: Request, h: ResponseToolkit) {
+      try {
+        const user = await db.userStore.getById(request.params.id);
+        if (!user) {
+          return Boom.notFound("No User with this id");
+        }
+        await db.userStore.deleteById(request.params.id);
+        return h.response().code(204);
+      } catch (err) {
+        return Boom.serverUnavailable("Database Error");
+      }
+    },
+    tags: ["api"],
+    description: "Delete a user",
+    validate: { params: { id: IdSpec }, failAction: "ignore" },
+  },
+
   deleteAll: {
     auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
