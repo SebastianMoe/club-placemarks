@@ -65,12 +65,19 @@ export const clubApi = {
       try {
         const payload = request.payload as any;
         
-        let imageUrl = "";
+        const imageUrls: string[] = [];
         
         if (payload.image) {
-            const url = await imageStore.uploadImage(payload.image);
-            if (url) {
-                imageUrl = url;
+            const files = Array.isArray(payload.image) ? payload.image : [payload.image];
+            for (let i = 0; i < files.length; i += 1) {
+                const file = files[i];
+                
+                // eslint-disable-next-line no-await-in-loop
+                const url = await imageStore.uploadImage(file);
+                
+                if (url) {
+                    imageUrls.push(url);
+                }
             }
         }
 
@@ -80,7 +87,7 @@ export const clubApi = {
             category: payload.category,
             latitude: Number(payload.latitude), 
             longitude: Number(payload.longitude),
-            imageUrls: imageUrl ? [imageUrl] : [], 
+            imageUrls: imageUrls, 
             userId: payload.userId 
         };
 
@@ -106,13 +113,41 @@ export const clubApi = {
     auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
-        const club = request.payload as Club;
-        const updatedClub = await db.clubStore.update(club);
-        if (!updatedClub) {
-          return Boom.notFound("No Club with this id");
+        const { id } = request.params;
+        const payload = request.payload as any;
+        
+        const existingClub = await db.clubStore.getById(id);
+        if (!existingClub) {
+            return Boom.notFound("Club not found");
         }
+
+        const newImageUrls: string[] = [];
+        if (payload.image) {
+            const files = Array.isArray(payload.image) ? payload.image : [payload.image];
+            for (let i = 0; i < files.length; i += 1) {
+                // eslint-disable-next-line no-await-in-loop
+                const url = await imageStore.uploadImage(files[i]);
+                if (url) newImageUrls.push(url);
+            }
+        }
+
+        const updatedImages = [...(existingClub.imageUrls || []), ...newImageUrls];
+
+        const updatedClubData = {
+            name: payload.name,
+            description: payload.description,
+            category: payload.category,
+            latitude: Number(payload.latitude),
+            longitude: Number(payload.longitude),
+            imageUrls: updatedImages, 
+            _id: id
+        };
+
+        const updatedClub = await db.clubStore.update(updatedClubData as any);
         return updatedClub;
+
       } catch (err) {
+        console.log(err);
         return Boom.serverUnavailable("Database Error");
       }
     },
@@ -155,5 +190,33 @@ export const clubApi = {
     tags: ["api"],
     description: "Delete all clubs",
     notes: "Returns 204 if successful",
+  },
+  deleteImage: {
+    auth: false,
+    handler: async function (request: Request, h: ResponseToolkit) {
+      try {
+        const { id } = request.params;
+        const { url } = request.payload as { url: string }; 
+
+        const club = await db.clubStore.getById(id);
+        if (!club) return Boom.notFound("Club not found");
+
+        const publicId = url.split("/").pop()?.split(".")[0];
+        if (publicId) {
+            await imageStore.deleteImage(publicId);
+        }
+
+        club.imageUrls = club.imageUrls?.filter((img) => img !== url) || [];
+
+        await db.clubStore.update(club);
+
+        return h.response().code(204);
+      } catch (err) {
+        console.log(err);
+        return Boom.serverUnavailable("Database Error");
+      }
+    },
+    tags: ["api"],
+    description: "Delete an image from a club",
   },
 };

@@ -64,8 +64,10 @@ export const apiRoutes: ServerRoute[] = [
       tags: ["api"],
       payload: {
         multipart: true, 
-        output: "file",  
-        maxBytes: 10000000, 
+        output: "stream",  
+        maxBytes: 200000000,
+        parse: true,
+        allow: "multipart/form-data"
       },
     },
     handler: clubApi.create.handler,
@@ -73,7 +75,17 @@ export const apiRoutes: ServerRoute[] = [
   {
     method: "PUT",
     path: "/api/clubs/{id}",
-    options: { auth: false, tags: ["api"] },
+    options: {
+      auth: false,
+      tags: ["api"],
+      payload: {
+        multipart: true,
+        output: "stream",
+        parse: true,
+        maxBytes: 209715200,
+        allow: "multipart/form-data"
+      }
+    },
     handler: clubApi.update.handler,
   },
   {
@@ -87,6 +99,15 @@ export const apiRoutes: ServerRoute[] = [
     path: "/api/clubs",
     options: { auth: false, tags: ["api"] },
     handler: clubApi.deleteAll.handler,
+  },
+  {
+    method: "DELETE",
+    path: "/api/clubs/{id}/image", 
+    options: {
+      auth: false,
+      tags: ["api"],
+    },
+    handler: clubApi.deleteImage.handler,
   },
 
   // Member Stats API routes
