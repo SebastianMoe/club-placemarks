@@ -32,5 +32,11 @@ export const memberStatsMongoStore = {
 
   async deleteAll(): Promise<void> {
     await MemberStatsMongoose.deleteMany({});
+  },
+
+  async deleteById(id: string): Promise<MemberStats | null> {
+    const stat = await MemberStatsMongoose.findByIdAndDelete(id).lean();
+    if (!stat) return null;
+    return { ...stat, _id: stat._id.toString() } as MemberStats;
   }
 };

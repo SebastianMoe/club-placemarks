@@ -50,6 +50,7 @@ export interface MemberStatsStore {
   getByClubId(clubId: string): Promise<MemberStats[]>;
   create(stats: NewMemberStats): Promise<MemberStats>;
   deleteAll(): Promise<void>;
+  deleteById(id: MemberStats["_id"]): Promise<MemberStats | null>;
 }
 
 interface DataBase {

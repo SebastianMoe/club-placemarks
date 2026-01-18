@@ -44,5 +44,20 @@ export const memberStatsApi = {
             return Boom.serverUnavailable("Database Error");
         }
     }
+  },
+
+  deleteOne: {
+    auth: false,
+    handler: async function (request: Request, h: ResponseToolkit) {
+        try {
+            const memberStat =await db.memberStatsStore.deleteById(request.params.id);
+            if (!memberStat) {
+              return Boom.notFound("No Member Stat with this id");
+            }
+            return h.response().code(204);
+        } catch (err) {
+            return Boom.serverUnavailable("Database Error");
+        }
+    }
   }
 };

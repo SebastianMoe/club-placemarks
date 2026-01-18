@@ -136,7 +136,7 @@ export const apiRoutes: ServerRoute[] = [
     method: "DELETE",
     path: "/api/clubs/{clubId}/stats/{id}", 
     options: { tags: ["api"] },
-    handler: memberStatsApi.deleteAll.handler,
+    handler: memberStatsApi.deleteOne.handler,
   },
 
   // Event API Routes
@@ -148,7 +148,7 @@ export const apiRoutes: ServerRoute[] = [
   },
   {
     method: "GET",
-    path: "/api/clubs/{clubId}/events", // Events pro Club
+    path: "/api/clubs/{clubId}/events", 
     options: { tags: ["api"] },
     handler: eventApi.findByClub.handler,
   },
