@@ -7,7 +7,6 @@ import { imageStore } from "../model/store/image-store.js";
 
 export const clubApi = {
   find: {
-    auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
         const clubs = await db.clubStore.getAll();
@@ -16,14 +15,16 @@ export const clubApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
-    tags: ["api"],
-    description: "Get all clubs",
-    notes: "Returns all clubs",
-    response: { schema: ClubArray, failAction: "ignore" },
+    options: {
+        auth: { strategy: "jwt" },
+        tags: ["api"],
+        description: "Get all clubs",
+        notes: "Returns all clubs",
+        response: { schema: ClubArray, failAction: "ignore" },
+    }
   },
 
   findOne: {
-    auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
         const club = await db.clubStore.getById(request.params.id);
@@ -35,15 +36,17 @@ export const clubApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
-    tags: ["api"],
-    description: "Find a Club",
-    notes: "Returns a club",
-    validate: { params: { id: IdSpec }, failAction: "ignore" },
-    response: { schema: ClubSpecPlus, failAction: "ignore" },
+    options: {
+        auth: { strategy: "jwt" },
+        tags: ["api"],
+        description: "Find a Club",
+        notes: "Returns a club",
+        validate: { params: { id: IdSpec }, failAction: "ignore" },
+        response: { schema: ClubSpecPlus, failAction: "ignore" },
+    }
   },
 
   findByUser: {
-    auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
         const clubs = await db.clubStore.getByUserId(request.params.userId);
@@ -52,15 +55,17 @@ export const clubApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
-    tags: ["api"],
-    description: "Find Clubs by User",
-    notes: "Returns all clubs for a user",
-    validate: { params: { userId: IdSpec }, failAction: "ignore" },
-    response: { schema: ClubArray, failAction: "ignore" },
+    options: {
+        auth: { strategy: "jwt" },
+        tags: ["api"],
+        description: "Find Clubs by User",
+        notes: "Returns all clubs for a user",
+        validate: { params: { userId: IdSpec }, failAction: "ignore" },
+        response: { schema: ClubArray, failAction: "ignore" },
+    }
   },
 
   create: {
-    auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
         const payload = request.payload as any;
@@ -102,15 +107,24 @@ export const clubApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
-    tags: ["api"],
-    description: "Create a Club",
-    notes: "Returns the newly created club",
-    validate: { payload: ClubSpec, failAction: "ignore" },
-    response: { schema: ClubSpecPlus, failAction: "ignore" },
+    options: {
+        auth: { strategy: "jwt" },
+        tags: ["api"],
+        description: "Create a Club",
+        notes: "Returns the newly created club",
+        validate: { payload: ClubSpec, failAction: "ignore" },
+        response: { schema: ClubSpecPlus, failAction: "ignore" },
+         payload: {
+            multipart: true,
+            output: "stream",
+            maxBytes: 200000000,
+            parse: true,
+            allow: "multipart/form-data"
+        },
+    }
   },
 
   update: {
-    auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
         const { id } = request.params;
@@ -151,15 +165,24 @@ export const clubApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
-    tags: ["api"],
-    description: "Update a Club",
-    notes: "Returns the updated club",
-    validate: { payload: ClubSpecPlus, failAction: "ignore" },
-    response: { schema: ClubSpecPlus, failAction: "ignore" },
+    options: {
+        auth: { strategy: "jwt" },
+        tags: ["api"],
+        description: "Update a Club",
+        notes: "Returns the updated club",
+        validate: { payload: ClubSpecPlus, failAction: "ignore" },
+        response: { schema: ClubSpecPlus, failAction: "ignore" },
+        payload: {
+            multipart: true,
+            output: "stream",
+            parse: true,
+            maxBytes: 209715200,
+            allow: "multipart/form-data"
+        }
+    }
   },
 
   deleteOne: {
-    auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
         const club = await db.clubStore.deleteById(request.params.id);
@@ -171,14 +194,16 @@ export const clubApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
-    tags: ["api"],
-    description: "Delete a Club",
-    notes: "Returns 204 if successful",
-    validate: { params: { id: IdSpec }, failAction: "ignore" },
+    options: {
+        auth: { strategy: "jwt" },
+        tags: ["api"],
+        description: "Delete a Club",
+        notes: "Returns 204 if successful",
+        validate: { params: { id: IdSpec }, failAction: "ignore" },
+    }
   },
 
   deleteAll: {
-    auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
         await db.clubStore.deleteAll();
@@ -187,13 +212,15 @@ export const clubApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
-    tags: ["api"],
-    description: "Delete all clubs",
-    notes: "Returns 204 if successful",
+    options: {
+        auth: { strategy: "jwt" },
+        tags: ["api"],
+        description: "Delete all clubs",
+        notes: "Returns 204 if successful",
+    }
   },
   
   deleteImage: {
-    auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
         const { id } = request.params;
@@ -217,7 +244,10 @@ export const clubApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
-    tags: ["api"],
-    description: "Delete an image from a club",
-  },
+    options: {
+        auth: { strategy: "jwt" },
+        tags: ["api"],
+        description: "Delete an image from a club",
+    }
+  }
 };
