@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 import { dataBase as db } from "../model/db.js";
 import type { NewUser, User } from "../model/interface/user.js";
 import { IdSpec, UserArray, UserCredentialsSpec, UserSpec, UserSpecPlus } from "./joi-schemas.js";
+import { createToken } from "./jwt-utils.js";
 
 interface UserCredentials {
   email: string;
@@ -122,7 +123,8 @@ export const userApi = {
           return Boom.unauthorized("Invalid password");
         }
         
-        return h.response({ success: true, userId: user._id, role: user.scope }).code(200);
+        const token = createToken(user);
+        return h.response({ success: true, userId: user._id, role: user.scope, token: token }).code(200);
       } catch (err) {
         return Boom.serverUnavailable("Database Error");
       }
