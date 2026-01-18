@@ -35,7 +35,7 @@ export class ClubService {
       email: user.email,
       password: user.password,
     });
-    this.axios.defaults.headers.common.Authorization = "Bearer " + response.data.token;
+    this.axios.defaults.headers.common.Authorization = `Bearer ${response.data.token}`;
     return response.data;
   }
 
