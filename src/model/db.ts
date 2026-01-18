@@ -47,9 +47,13 @@ export interface ClubStore {
 
 export interface MemberStatsStore {
   getAll(): Promise<MemberStats[]>;
+
   getByClubId(clubId: string): Promise<MemberStats[]>;
+
   create(stats: NewMemberStats): Promise<MemberStats>;
+
   deleteAll(): Promise<void>;
+
   deleteById(id: MemberStats["_id"]): Promise<MemberStats | null>;
 }
 

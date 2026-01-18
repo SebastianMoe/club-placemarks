@@ -16,18 +16,18 @@ const MemberStatsMongoose = model<MemberStats>("MemberStats", memberStatsSchema)
 export const memberStatsMongoStore = {
   async getAll(): Promise<MemberStats[]> {
     const stats = await MemberStatsMongoose.find().lean();
-    return stats.map((s: any) => ({ ...s, _id: s._id.toString() }));
+    return stats;
   },
 
   async getByClubId(clubId: string): Promise<MemberStats[]> {
     const stats = await MemberStatsMongoose.find({ clubId }).lean();
-    return stats.map((s: any) => ({ ...s, _id: s._id.toString() }));
+    return stats;
   },
 
   async create(stats: NewMemberStats): Promise<MemberStats> {
     const newStats = new MemberStatsMongoose(stats);
     await newStats.save();
-    return { ...newStats.toObject(), _id: newStats._id.toString() };
+    return newStats;
   },
 
   async deleteAll(): Promise<void> {
@@ -37,6 +37,6 @@ export const memberStatsMongoStore = {
   async deleteById(id: string): Promise<MemberStats | null> {
     const stat = await MemberStatsMongoose.findByIdAndDelete(id).lean();
     if (!stat) return null;
-    return { ...stat, _id: stat._id.toString() } as MemberStats;
+    return stat;
   }
 };

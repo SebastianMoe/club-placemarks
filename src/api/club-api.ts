@@ -191,6 +191,7 @@ export const clubApi = {
     description: "Delete all clubs",
     notes: "Returns 204 if successful",
   },
+  
   deleteImage: {
     auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {

@@ -2,14 +2,9 @@ import Boom from "@hapi/boom";
 import type { Request, ResponseToolkit } from "@hapi/hapi";
 import bcrypt from "bcrypt";
 import { dataBase as db } from "../model/db.js";
-import type { NewUser, User } from "../model/interface/user.js";
+import type { NewUser, User, UserCredentials } from "../model/interface/user.js";
 import { IdSpec, UserArray, UserCredentialsSpec, UserSpec, UserSpecPlus } from "./joi-schemas.js";
 import { createToken } from "./jwt-utils.js";
-
-interface UserCredentials {
-  email: string;
-  password: string;
-}
 
 export const userApi = {
   find: {
