@@ -2,6 +2,7 @@ import Hapi from "@hapi/hapi";
 import Inert from "@hapi/inert";
 import Vision from "@hapi/vision";
 import Cookie from "@hapi/cookie";
+import Joi from "joi";
 import HapiSwagger from "hapi-swagger";
 import dotenv from "dotenv";
 import * as hapiAuthJwt2 from "hapi-auth-jwt2";
@@ -33,10 +34,33 @@ const init = async () => {
     },
   });
 
+  server.validator(Joi);
+
+  const swaggerOptions = {
+    info: {
+      title: "Club Placemarks API",
+      version: "0.1",
+    },
+    securityDefinitions: {
+    jwt: {
+      type: "apiKey",
+      name: "Authorization",
+      in: "header",
+      },
+    },
+    security: [{ jwt: [] }]
+  };
+
   await server.register(Vision);
   await server.register(Cookie);
   await server.register(Inert);
   await server.register(hapiAuthJwt2);
+  await server.register([
+    {
+      plugin: HapiSwagger,
+      options: swaggerOptions,
+    },
+  ]);
 
   server.auth.strategy("session", "cookie", {
     cookie: {

@@ -20,19 +20,19 @@ const ClubMongoose = model<Club>("Club", clubSchema);
 export const clubMongoStore: ClubStore = {
   async getAll(): Promise<Club[]> {
     const clubs = await ClubMongoose.find().lean();
-    return clubs.map((c: any) => ({ ...c, _id: c._id.toString() })) as Club[];
+    return clubs;
   },
 
   async getById(clubId: string): Promise<Club | null> {
     if (!isValidObjectId(clubId)) return null;
     const club = await ClubMongoose.findOne({ _id: clubId }).lean();
     if (!club) return null;
-    return { ...club, _id: club._id.toString() } as Club;
+    return club;
   },
 
   async getByUserId(userId: string): Promise<Club[]> {
     const clubs = await ClubMongoose.find({ userId }).lean();
-    return clubs.map((c: any) => ({ ...c, _id: c._id.toString() })) as Club[];
+    return clubs;
   },
 
   async create(newClub: NewClub, userId: string): Promise<Club> {
@@ -44,14 +44,14 @@ export const clubMongoStore: ClubStore = {
       imageUrls: imageUrls
     });
     await club.save();
-    return { ...club.toObject(), _id: club._id.toString() } as Club;
+    return club;
   },
 
   async update(club: Club): Promise<Club | null> {
     const { _id, ...updateData } = club;
     const updatedClub = await ClubMongoose.findOneAndUpdate({ _id: _id }, updateData, { new: true }).lean();
     if (!updatedClub) return null;
-    return { ...updatedClub, _id: updatedClub._id.toString() } as Club;
+    return updatedClub;
   },
 
   async deleteAll(): Promise<Club[]> {

@@ -12,8 +12,6 @@ export const UserCredentialsSpec = Joi.object()
 export const UserSpec = UserCredentialsSpec.keys({
   firstName: Joi.string().example("Homer").required(),
   lastName: Joi.string().example("Simpson").required(),
-  aboutMe: Joi.string().example("A regular guy").optional(),
-  imageUrl: Joi.string().example("http://example.com/homer.jpg").optional(),
 }).label("UserDetails");
 
 export const UserSpecPlus = UserSpec.keys({
@@ -23,15 +21,53 @@ export const UserSpecPlus = UserSpec.keys({
 
 export const UserArray = Joi.array().items(UserSpecPlus).label("UserArray");
 
+export const MemberStatsSpec = Joi.object()
+  .keys({
+    total: Joi.number().required().example(150),
+    adultMale: Joi.number().required().example(60),
+    adultFemale: Joi.number().required().example(50),
+    youthMale: Joi.number().required().example(20),
+    youthFemale: Joi.number().required().example(20),
+    date: Joi.string().required().example("2023-12-31"),
+    clubId: IdSpec,
+  })
+  .label("MemberStats");
+
+export const MemberStatsSpecPlus = MemberStatsSpec.keys({
+  _id: IdSpec,
+  __v: Joi.number(),
+}).label("MemberStatsPlus");
+
+export const MemberStatsArray = Joi.array().items(MemberStatsSpecPlus).label("MemberStatsArray");
+
+export const EventSpec = Joi.object()
+  .keys({
+    title: Joi.string().required().example("Summer Festival"),
+    description: Joi.string().optional().example("Fun in the sun"),
+    date: Joi.string().required().example("2024-07-15"),
+    attendees: Joi.number().required().example(300),
+    latitude: Joi.number().required().example(49.0134),
+    longitude: Joi.number().required().example(12.1016),
+    clubId: IdSpec,
+  })
+  .label("Event");
+
+export const EventSpecPlus = EventSpec.keys({
+  _id: IdSpec,
+  __v: Joi.number(),
+}).label("EventPlus");
+
+export const EventArray = Joi.array().items(EventSpecPlus).label("EventArray");
+
 export const ClubSpec = Joi.object()
   .keys({
-    name: Joi.string().example("DLRG Regensburg").required(),
-    description: Joi.string().example("Deutsche Lebens-Rettungs-Gesellschaft Ortsgruppe Regensburg").optional(),
-    latitude: Joi.number().example(49.0195).optional(),
-    longitude: Joi.number().example(12.0974).optional(),
-    category: Joi.string().example("sports").optional(),
-    imageUrls: Joi.array().items(Joi.string()).example(["http://example.com/image.jpg"]).optional(),
+    name: Joi.string().required().example("FC Springfields"),
+    description: Joi.string().optional().example("Local football club"),
+    category: Joi.string().required().example("sports"),
+    latitude: Joi.number().required().example(49.01),
+    longitude: Joi.number().required().example(12.10),
     userId: IdSpec,
+    imageUrls: Joi.array().items(Joi.string()).optional(),
   })
   .label("Club");
 
@@ -42,11 +78,10 @@ export const ClubSpecPlus = ClubSpec.keys({
 
 export const ClubArray = Joi.array().items(ClubSpecPlus).label("ClubArray");
 
-export const createMemberStatsSchema = Joi.object({
-  total: Joi.number().required(),
-  adultMale: Joi.number().required(),
-  adultFemale: Joi.number().required(),
-  youthMale: Joi.number().required(),
-  youthFemale: Joi.number().required(),
-  date: Joi.date().required(),
-});
+export const JwtAuth = Joi.object()
+  .keys({
+    success: Joi.boolean().example(true).required(),
+    token: Joi.string().example("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...").required(),
+    userId: IdSpec.required(),
+  })
+  .label("JwtAuth");

@@ -1,10 +1,10 @@
 import Boom from "@hapi/boom";
 import type { Request, ResponseToolkit } from "@hapi/hapi";
 import { eventMongoStore } from "../model/store/mongo/event-mongo-store.js";
+import { EventSpec, EventSpecPlus, IdSpec, EventArray } from "./joi-schemas.js";
 
 export const eventApi = {
   find: {
-    auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
         const events = await eventMongoStore.getAll();
@@ -13,12 +13,15 @@ export const eventApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
-    tags: ["api"],
-    description: "Get all events",
+    options: {
+        auth: { strategy: "jwt" },
+        tags: ["api"],
+        description: "Get all events",
+        response: { schema: EventArray, failAction: "ignore" },
+    }
   },
 
   findByClub: {
-    auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
         const events = await eventMongoStore.getByClubId(request.params.clubId);
@@ -27,12 +30,15 @@ export const eventApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
-    tags: ["api"],
-    description: "Get events for a club",
+    options: {
+        auth: { strategy: "jwt" },
+        tags: ["api"],
+        description: "Get events for a club",
+        validate: { params: { clubId: IdSpec }, failAction: "ignore" },
+    }
   },
 
   create: {
-    auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
         const event = request.payload as any;
@@ -42,12 +48,16 @@ export const eventApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
-    tags: ["api"],
-    description: "Create an event",
+    options: {
+        auth: { strategy: "jwt" },
+        tags: ["api"],
+        description: "Create an event",
+        validate: { payload: EventSpec, failAction: "ignore" },
+        response: { schema: EventSpecPlus, failAction: "ignore" },
+    }
   },
 
   deleteOne: {
-    auth: false,
     handler: async function (request: Request, h: ResponseToolkit) {
       try {
         await eventMongoStore.delete(request.params.id);
@@ -56,7 +66,26 @@ export const eventApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
-    tags: ["api"],
-    description: "Delete an event",
+    options: {
+        auth: { strategy: "jwt" },
+        tags: ["api"],
+        description: "Delete an event",
+        validate: { params: { id: IdSpec }, failAction: "ignore" },
+    }
+  },
+  deleteAll: {
+    handler: async function (request: Request, h: ResponseToolkit) {
+      try {
+        await eventMongoStore.deleteAll();
+        return h.response().code(204);
+      } catch (err) {
+        return Boom.serverUnavailable("Database Error");
+      }
+    },
+    options: {
+        auth: { strategy: "jwt" },
+        tags: ["api"],
+        description: "Delete all events",
+    }
   },
 };

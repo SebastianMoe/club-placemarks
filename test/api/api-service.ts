@@ -1,17 +1,26 @@
 import axios, { type AxiosInstance } from "axios";
+import dotenv from "dotenv";
 import type { NewUser, User } from "../../src/model/interface/user.ts";
 import type { NewClub, Club } from "../../src/model/interface/club.ts";
 import type { NewMemberStats } from "../../src/model/interface/member-stats.js";
 
+dotenv.config();
+
 export class ClubService {
-  clubUrl = "http://localhost:3000";
+  clubUrl = "";
 
   axios: AxiosInstance;
 
-  constructor(baseUrl = "http://localhost:3000") {
-    this.clubUrl = baseUrl;
+  constructor(baseUrl?: string) {
+    if (baseUrl) {
+      this.clubUrl = baseUrl;
+    } else {
+      const port = process.env.PORT || "3000";
+      const host = process.env.HOST || "localhost";
+      this.clubUrl = `http://${host}:${port}`;
+    }
     this.axios = axios.create({
-      baseURL: baseUrl,
+      baseURL: this.clubUrl,
       timeout: 10000,
       withCredentials: true,
     });

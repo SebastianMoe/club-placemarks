@@ -19,18 +19,18 @@ const EventMongoose = model<Event>("Event", eventSchema);
 export const eventMongoStore = {
   async getAll(): Promise<Event[]> {
     const events = await EventMongoose.find().lean();
-    return events.map((e: any) => ({ ...e, _id: e._id.toString() }));
+    return events;
   },
 
   async getByClubId(clubId: string): Promise<Event[]> {
     const events = await EventMongoose.find({ clubId }).lean();
-    return events.map((e: any) => ({ ...e, _id: e._id.toString() }));
+    return events;
   },
 
   async add(event: Event): Promise<Event> {
     const newEvent = new EventMongoose(event);
     await newEvent.save();
-    return { ...newEvent.toObject(), _id: newEvent._id.toString() } as Event;
+    return newEvent;
   },
 
   async delete(id: string) {

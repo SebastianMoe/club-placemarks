@@ -10,3 +10,8 @@ export interface User {
 }
 
 export type NewUser = Omit<User, "_id" | "aboutMe" | "imageUrl" | "scope">;
+
+export interface UserCredentials {
+  email: string;
+  password: string;
+}

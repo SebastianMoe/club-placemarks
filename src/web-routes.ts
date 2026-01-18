@@ -27,7 +27,4 @@ export const webRoutes: ServerRoute[] = [
   { method: "GET", path: "/club/{id}", ...clubsController.showClub },
   { method: "GET", path: "/club/{id}/edit", ...clubsController.showEditClub },
   { method: "POST", path: "/club/{id}/edit", ...clubsController.updateClub },
-
-  // static ressources route for @hapi/inert plugin
-  { method: "GET", path: "/{param*}", options: { auth: false }, handler: { directory: { path: "./public" } } },
 ];
