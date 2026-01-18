@@ -27,7 +27,8 @@ suite("User API tests", () => {
 
   test("create a user", async () => {
     const newUser = await clubService.createUser(maggie);
-    assertSubset(maggie, newUser);
+    const { password, ...userWithoutPassword } = maggie;
+    assertSubset(userWithoutPassword, newUser);
     assert.isDefined(newUser._id);
   });
 

@@ -116,10 +116,10 @@ export const clubApi = {
         response: { schema: ClubSpecPlus, failAction: "ignore" },
          payload: {
             multipart: true,
-            output: "stream",
+            output: "data",
             maxBytes: 200000000,
             parse: true,
-            allow: "multipart/form-data"
+            allow: ["application/json", "multipart/form-data"]
         },
     }
   },
@@ -145,7 +145,12 @@ export const clubApi = {
             }
         }
 
-        const updatedImages = [...(existingClub.imageUrls || []), ...newImageUrls];
+        let currentImages = existingClub.imageUrls || [];
+        if (payload.imageUrls !== undefined) {
+             currentImages = Array.isArray(payload.imageUrls) ? payload.imageUrls : [payload.imageUrls];
+        }
+
+        const updatedImages = [...currentImages, ...newImageUrls];
 
         const updatedClubData = {
             name: payload.name,
@@ -174,10 +179,10 @@ export const clubApi = {
         response: { schema: ClubSpecPlus, failAction: "ignore" },
         payload: {
             multipart: true,
-            output: "stream",
+            output: "data",
             parse: true,
             maxBytes: 209715200,
-            allow: "multipart/form-data"
+            allow: ["application/json", "multipart/form-data"]
         }
     }
   },

@@ -5,7 +5,7 @@
       "password": "architect123",
       "firstName": "Ted",
       "lastName": "Mosby",
-      "_id": "9c3fcf9b-fc87-4ce9-8ade-c44939819386",
+      "_id": "647f1e16-cfae-4cc8-ac49-7cfea921d16f",
       "aboutMe": null,
       "imageUrl": null,
       "scope": [
@@ -17,7 +17,7 @@
       "password": "suitUp456",
       "firstName": "Barny",
       "lastName": "Stinson",
-      "_id": "d6a88fff-86ca-4a16-b96d-0ae5e412cf1b",
+      "_id": "f258843f-2faf-4ec5-9e3f-ab03fc4ed51d",
       "aboutMe": null,
       "imageUrl": null,
       "scope": [
@@ -29,7 +29,7 @@
       "password": "canadian789",
       "firstName": "Robin",
       "lastName": "Scherbatsky",
-      "_id": "99a388d3-6cee-4fcf-955b-fbd3aeb4a9f9",
+      "_id": "6d8721ed-0a09-4112-9f68-c20b7b9ea62d",
       "aboutMe": null,
       "imageUrl": null,
       "scope": [
@@ -43,30 +43,30 @@
       "description": "Deutsche Lebens-Rettungs-Gesellschaft Ortsgruppe Regensburg",
       "latitude": 49.0195,
       "longitude": 12.0974,
-      "category": "other",
-      "_id": "fa4b50dc-d0b4-4835-8116-1d323ac3afff",
-      "userId": "b481e629-182a-417b-88eb-19c3e93d0967",
-      "imageUrls": []
+      "category": "test",
+      "imageUrls": [],
+      "_id": "0900db15-1729-4ce5-acb1-eb76d2d9241c",
+      "userId": "35d2f7c1-3307-42d1-bb3f-d10e7485d124"
     },
     {
       "name": "DLRG Amberg",
       "description": "Deutsche Lebens-Rettungs-Gesellschaft Ortsgruppe Amberg",
       "latitude": 49.4447,
       "longitude": 11.8583,
-      "category": "other",
-      "_id": "eb541be6-b6a0-4b2a-8563-aa88ce36369c",
-      "userId": "b481e629-182a-417b-88eb-19c3e93d0967",
-      "imageUrls": []
+      "category": "test",
+      "imageUrls": [],
+      "_id": "84c02a6b-3fd0-4822-a8e2-893ce9d3ecb2",
+      "userId": "35d2f7c1-3307-42d1-bb3f-d10e7485d124"
     },
     {
       "name": "DLRG Furth im Wald",
       "description": "Deutsche Lebens-Rettungs-Gesellschaft Ortsgruppe Furth im Wald",
       "latitude": 49.3089,
       "longitude": 12.8447,
-      "category": "other",
-      "_id": "390184de-dcbe-40a5-b9bd-dc2fb9f5da85",
-      "userId": "b481e629-182a-417b-88eb-19c3e93d0967",
-      "imageUrls": []
+      "category": "test",
+      "imageUrls": [],
+      "_id": "83bfde0c-8ca9-48c0-b034-dd2e5a81c80d",
+      "userId": "35d2f7c1-3307-42d1-bb3f-d10e7485d124"
     }
   ]
 }

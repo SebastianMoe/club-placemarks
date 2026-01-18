@@ -11,9 +11,11 @@ suite("Member Stats API tests", () => {
 
   setup(async () => {
     clubService.clearAuth();
-    await clubService.deleteAllUsers();
+    await clubService.createUser(maggie);
+    await clubService.authenticate(maggie);
+    await clubService.deleteAllStats();
     await clubService.deleteAllClubs();
-    await clubService.deleteAllStats(); // Neu
+    await clubService.deleteAllUsers();
 
     user = await clubService.createUser(maggie);
     await clubService.authenticate(maggie);
