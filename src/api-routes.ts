@@ -10,13 +10,13 @@ export const apiRoutes: ServerRoute[] = [
   {
     method: "GET",
     path: "/api/users",
-    options: { auth: false, tags: ["api"] },
+    options: { tags: ["api"] },
     handler: userApi.find.handler,
   },
   {
     method: "GET",
     path: "/api/users/{id}",
-    options: { auth: false, tags: ["api"] },
+    options: { tags: ["api"] },
     handler: userApi.findOne.handler,
   },
   {
@@ -28,13 +28,13 @@ export const apiRoutes: ServerRoute[] = [
   {
     method: "DELETE",
     path: "/api/users/{id}",
-    options: { auth: false, tags: ["api"] },
+    options: { tags: ["api"] },
     handler: userApi.deleteOne.handler,
   },
   {
     method: "DELETE",
     path: "/api/users",
-    options: { auth: false, tags: ["api"] },
+    options: { tags: ["api"] },
     handler: userApi.deleteAll.handler,
   },
   {
@@ -48,26 +48,25 @@ export const apiRoutes: ServerRoute[] = [
   {
     method: "GET",
     path: "/api/clubs",
-    options: { auth: false, tags: ["api"] },
+    options: { tags: ["api"] },
     handler: clubApi.find.handler,
   },
   {
     method: "GET",
     path: "/api/clubs/{id}",
-    options: { auth: false, tags: ["api"] },
+    options: { tags: ["api"] },
     handler: clubApi.findOne.handler,
   },
   {
     method: "GET",
     path: "/api/users/{userId}/clubs",
-    options: { auth: false, tags: ["api"] },
+    options: { tags: ["api"] },
     handler: clubApi.findByUser.handler,
   },
   {
     method: "POST",
     path: "/api/clubs",
     options: {
-      auth: false, 
       tags: ["api"],
       payload: {
         multipart: true, 
@@ -83,7 +82,6 @@ export const apiRoutes: ServerRoute[] = [
     method: "PUT",
     path: "/api/clubs/{id}",
     options: {
-      auth: false,
       tags: ["api"],
       payload: {
         multipart: true,
@@ -98,20 +96,19 @@ export const apiRoutes: ServerRoute[] = [
   {
     method: "DELETE",
     path: "/api/clubs/{id}",
-    options: { auth: false, tags: ["api"] },
+    options: { tags: ["api"] },
     handler: clubApi.deleteOne.handler,
   },
   {
     method: "DELETE",
     path: "/api/clubs",
-    options: { auth: false, tags: ["api"] },
+    options: { tags: ["api"] },
     handler: clubApi.deleteAll.handler,
   },
   {
     method: "DELETE",
     path: "/api/clubs/{id}/image", 
     options: {
-      auth: false,
       tags: ["api"],
     },
     handler: clubApi.deleteImage.handler,
@@ -122,7 +119,6 @@ export const apiRoutes: ServerRoute[] = [
     method: "POST",
     path: "/api/clubs/{id}/stats",
     options: {
-      auth: false, 
       tags: ["api"],
       validate: {
         payload: createMemberStatsSchema
@@ -133,19 +129,13 @@ export const apiRoutes: ServerRoute[] = [
   {
     method: "GET",
     path: "/api/clubs/{id}/stats",
-    options: {
-      auth: false,
-      tags: ["api"],
-    },
+    options: { tags: ["api"]},
     handler: memberStatsApi.findByClub.handler,
   },
   {
     method: "DELETE",
     path: "/api/clubs/{clubId}/stats/{id}", 
-    options: {
-      auth: false,
-      tags: ["api"],
-    },
+    options: { tags: ["api"] },
     handler: memberStatsApi.deleteAll.handler,
   },
 
@@ -153,25 +143,25 @@ export const apiRoutes: ServerRoute[] = [
   {
     method: "GET",
     path: "/api/events",
-    options: { auth: false, tags: ["api"] },
+    options: { tags: ["api"] },
     handler: eventApi.find.handler,
   },
   {
     method: "GET",
     path: "/api/clubs/{clubId}/events", // Events pro Club
-    options: { auth: false, tags: ["api"] },
+    options: { tags: ["api"] },
     handler: eventApi.findByClub.handler,
   },
   {
     method: "POST",
     path: "/api/events",
-    options: { auth: false, tags: ["api"] },
+    options: { tags: ["api"] },
     handler: eventApi.create.handler,
   },
   {
     method: "DELETE",
     path: "/api/events/{id}",
-    options: { auth: false, tags: ["api"] },
+    options: { tags: ["api"] },
     handler: eventApi.deleteOne.handler,
   },
 ];

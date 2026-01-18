@@ -4,9 +4,11 @@ import Vision from "@hapi/vision";
 import Cookie from "@hapi/cookie";
 import HapiSwagger from "hapi-swagger";
 import dotenv from "dotenv";
+import * as hapiAuthJwt2 from "hapi-auth-jwt2";
 import { fileURLToPath } from "node:url";
 import * as path from "node:path";
 import Handlebars from "handlebars";
+import { validate } from "./api/jwt-utils.js";
 import { webRoutes } from "./web-routes.js";
 import { apiRoutes } from "./api-routes.js";
 import { accountsController } from "./controller/accountsController.js";
@@ -31,7 +33,10 @@ const init = async () => {
     },
   });
 
-  await server.register([Vision, Inert, Cookie]);
+  await server.register(Vision);
+  await server.register(Cookie);
+  await server.register(Inert);
+  await server.register(hapiAuthJwt2);
 
   server.auth.strategy("session", "cookie", {
     cookie: {
@@ -43,7 +48,13 @@ const init = async () => {
     validate: accountsController.validate,
   });
 
-  server.auth.default("session");
+  server.auth.strategy("jwt", "jwt", {
+    key: process.env.COOKIE_PASSWORD!,
+    validate: validate,
+    verifyOptions: { algorithms: ["HS256"] },
+  });
+
+  server.auth.default("jwt");
 
   Handlebars.registerHelper("eq", (a, b) => a === b);
 
