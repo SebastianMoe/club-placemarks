@@ -116,10 +116,10 @@ export const clubApi = {
         response: { schema: ClubSpecPlus, failAction: "ignore" },
          payload: {
             multipart: true,
-            output: "data",
+            output: "file",
             maxBytes: 200000000,
             parse: true,
-            allow: ["application/json", "multipart/form-data"]
+            allow: ["multipart/form-data"]
         },
     }
   },
@@ -179,10 +179,10 @@ export const clubApi = {
         response: { schema: ClubSpecPlus, failAction: "ignore" },
         payload: {
             multipart: true,
-            output: "data",
+            output: "file",
             parse: true,
             maxBytes: 209715200,
-            allow: ["application/json", "multipart/form-data"]
+            allow: ["multipart/form-data"]
         }
     }
   },

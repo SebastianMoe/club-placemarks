@@ -9,8 +9,11 @@
 # compiled typescript
 dist/
 
-#assignment files
+# assignment files
 assignment/
+
+# json db
+db.json
 
 # logs
 logs

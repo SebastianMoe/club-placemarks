@@ -35,7 +35,7 @@ export const testClub: NewClub = {
   description: "Deutsche Lebens-Rettungs-Gesellschaft Ortsgruppe Regensburg",
   latitude: 49.0195,
   longitude: 12.0974,
-  category: "test",
+  category: "rescue",
   imageUrls: [],
 };
 
@@ -45,7 +45,7 @@ export const testClubs: NewClub[] = [
     description: "Deutsche Lebens-Rettungs-Gesellschaft Ortsgruppe Regensburg",
     latitude: 49.0195,
     longitude: 12.0974,
-    category: "test",
+    category: "rescue",
     imageUrls: [],
   },
   {
@@ -53,7 +53,7 @@ export const testClubs: NewClub[] = [
     description: "Deutsche Lebens-Rettungs-Gesellschaft Ortsgruppe Amberg",
     latitude: 49.4447,
     longitude: 11.8583,
-    category: "test",
+    category: "rescue",
     imageUrls: [],
   },
   {

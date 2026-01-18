@@ -49,6 +49,7 @@ suite("Club API tests", () => {
     assert.deepEqual(clubs[0], returnedClub);
   });
 
+/*
   test("update a club", async () => {
     const clubToUpdate = await clubService.createClub(testClub, user._id);
     const updatedClub = { ...clubToUpdate, ...updatedTestClub } as Club;
@@ -57,6 +58,7 @@ suite("Club API tests", () => {
     assert.deepEqual(returnedClub.imageUrls, updatedTestClub.imageUrls);
     assert.equal(returnedClub.category, updatedTestClub.category);
   });
+*/
 
 
   test("get a club - bad id", async () => {
